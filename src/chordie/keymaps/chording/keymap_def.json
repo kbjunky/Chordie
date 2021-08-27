@@ -1,0 +1,290 @@
+{
+  "keys": [                        
+                        "ELU",                     "ERU",
+                        "ELS",                     "ERS",
+                        "ELD",                     "ERD",        
+  "kA", "kS",   "kE",   "kT",                      "kN",  "kI",   "kO", "kP",
+                        "BL1",                     "BR1",
+                        "TMBL0",                   "TMBR0",
+                        "TMBL1",                   "TMBR1"                                           
+  ],
+  "parameters": {
+    "layout_function_name": "LAYOUT",
+    "chord_timeout": 100,
+    "dance_timeout": 200,
+    "leader_timeout": 750,
+    "tap_timeout": 50,
+    "command_max_length": 5,
+    "leader_max_length": 5,
+    "dynamic_macro_max_length": 20,
+    "string_max_length": 16,
+    "long_press_multiplier": 2,
+    "default_pseudolayer": "ASETNIOP"
+  },
+  "layers": [    
+    {
+      "type": "auto"      
+      
+    }     
+  ],
+  "chord_sets": [   
+    {
+      "name": "asetniop",
+      "chords": [               
+        ["kA"], ["kS"], ["kE"], ["kT"], ["kN"], ["kI"], ["kO"], ["kP"],                       
+        ["kA", "kS", "kE", "kT"], ["kN", "kI", "kO", "kP"],
+        ["kA", "kT", "kN", "kP"],
+        ["kS", "kE", "kI", "kO"],
+        ["kA", "kS"], ["kS", "kE"], ["kE", "kT"], ["kT", "kN"], ["kN", "kI"], ["kI", "kO"], ["kO", "kP"],
+        ["kA", "kE"], ["kS", "kT"], ["kE", "kN"], ["kT", "kI"], ["kN", "kO"], ["kI", "kP"],
+        ["kA", "kT"], ["kS", "kN"], ["kE", "kI"], ["kT", "kO"], ["kN", "kP"],
+        ["kA", "kN"], ["kS", "kI"], ["kE", "kO"], ["kT", "kP"],
+        ["kA", "kI"], ["kS", "kO"], ["kE", "kP"],
+        ["kA", "kO"], ["kS", "kP"],
+        ["kA", "kP"], 
+        ["TMBR0"], ["TMBR1"],
+        ["TMBL0", "TMBR0"],
+        ["TMBL1", "TMBR1"],
+        ["kT", "kN", "kI"], ["kT", "kI", "kO"], ["kT", "kN", "kO"], ["kT", "kN", "kI", "kP"],
+        ["kE", "kN", "kI"], ["kE", "kI", "kO"], ["kE", "kN", "kO"], ["kE", "kN", "kI", "kP"],
+        ["TMBL0", "kT"], ["TMBL1", "kT"],
+        ["kA", "kS", "kE"], ["kS", "kE", "kT"], ["kN", "kI", "kO"], ["kI", "kO", "kP"],
+        ["kI", "kE", "kT"],
+        ["kE", "kT", "kN", "kI"], ["kA", "kS", "kO", "kP"],        
+        ["BR1"],
+        ["ELU"], ["ERU"],
+        ["ELS"], ["ERS"],
+        ["ELD"], ["ERD"],
+        ["kA", "kS", "kE", "kT", "kN", "kI", "kO", "kP"]
+      ]
+    },
+    {
+      "name": "ball_action",
+      "chords": [
+        ["kA"]
+      ]
+    },
+    {
+      "name": "mouse_buttons",
+      "chords": [               
+        ["BL1"], ["TMBL0"], ["TMBL1"]           
+      ]
+    },
+    {
+      "name": "asetniop_arr",
+      "chords": [               
+       ["kN"], ["kI"], ["kO"], ["kP"],       
+       ["kN", "kI"], ["kI", "kO"], ["kO", "kP"], ["kN", "kP"],
+       ["kA"], ["kS"], ["kE"], ["kT"]
+      ]
+    },
+    {
+      "name": "asetniop_123",
+      "chords": [               
+       ["kA"], ["kS"], ["kE"], ["kT"], ["kN"], ["kI"], ["kO"], ["kP"],
+       ["kE", "kT"], ["kN", "kI"],
+       ["kS", "kE"], ["kI", "kO"]            
+      ]
+    },
+    {
+      "name": "asetniop_fn",
+      "chords": [               
+        ["kA"], ["kS"], ["kE"], ["kT"], ["kN"], ["kI"], ["kO"], ["kP"],
+        ["kE", "kT"], ["kN", "kI"],
+        ["kS", "kE"], ["kI", "kO"]          
+      ]
+    },
+    {
+      "name": "asetniop_mods",
+      "chords": [               
+        ["kS"], ["kE"], ["kT"]          
+      ]
+    },    
+    {
+      "name": "asetniop_num",
+      "chords": [               
+        ["kA"], ["kS"], ["kE"], ["kT"], ["kN"], ["kI"], ["kO"], ["kP"],
+        ["kE", "kT"], ["kN", "kI"],
+        ["kS", "kE"], ["kA", "kT"],
+        ["kI", "kO"],  ["kN", "kP"],
+        ["kA", "kS", "kE", "kT"], ["kN", "kI", "kO", "kP"]
+      ]
+    }
+  ],
+  "pseudolayers": [
+    {
+      "name": "ALWAYS_ON",
+      "chords": [
+        {
+          "type": "chord_set",
+          "set": "mouse_buttons",
+          "keycodes": [                        
+          "PD(MOUSE_BTN3)", "PD(MOUSE_BTN1)", "PD(MOUSE_BTN2)"
+        ]
+        }           
+      ]
+    },       
+    {
+      "name": "ASETNIOP",
+      "chords": [
+        {
+          "type": "chord_set",
+          "set": "asetniop",
+          "keycodes": [                        
+            "KL(A, asetniop_mods)", "AS(S)", "AS(E)", "AS(T)", "AS(N)", "AS(I)", "AS(O)", "AS(P)",                                   
+            "TAB", "ENTER",
+            "CLEAR",
+            "CAPS",
+            "AS(W)", "AS(D)", "AS(R)", "AS(B)", "AS(H)", "AS(L)", "AS(;)",
+            "AS(X)", "AS(C)", "AS(Y)", "AS(V)", "AS(U)",  "LGUI",
+            "AS(F)", "AS(J)", "AS(,)", "AS(G)", "AS(M)",
+            "AS(Q)", "AS(K)", "AS(-)", "BSPC",
+            "AS(Z)", "AS(.)", "AS(')",
+            "AS([)", "AS(])",
+            "AS(/)", 
+            "KL(SPACE, asetniop_arr)", "KL(DEL, asetniop_123)",
+            "KL(ENTER, asetniop_num)",
+            "KL(ESC, asetniop_fn)",
+            "O(KC_LSFT)", "O(KC_LCTL)", "O(KC_LALT)", "O(KC_LGUI)",
+            "O(KC_RSFT)", "O(KC_RCTL)", "O(KC_RALT)", "O(KC_RGUI)",
+            "MO(ball_scroll)", "MO(ball_volume)",
+            "AS(GRV)", "AS(BSLS)", "AS(=)", "ESC",
+            "INS",
+            "LEAD", "LOCK",            
+            "ESC",
+            "VOLU", "WH_U",
+            "MUTE", "PD(MOUSE_BTN2)",
+            "VOLD", "WH_D",
+            "RESET"
+        ]
+        }
+      ]
+    },
+    {
+      "name": "asetniop_123",
+      "chords": [
+        {
+          "type": "chord_set",
+          "set": "asetniop_123",
+          "keycodes": [                        
+          "AS(1)", "AS(2)", "AS(3)", "AS(4)", "AS(7)", "AS(8)", "AS(9)", "AS(0)",
+          "AS(5)", "AS(6)",
+          "AS(GRV)", "AS(BSLS)"
+        ]
+        }           
+      ]
+    },
+    {
+      "name": "asetniop_fn",
+      "chords": [
+        {
+          "type": "chord_set",
+          "set": "asetniop_fn",
+          "keycodes": [                        
+            "AS(F1)", "AS(F2)", "AS(F3)", "AS(F4)", "AS(F7)", "AS(F8)", "AS(F9)", "AS(F10)",
+            "AS(F5)", "AS(F6)",
+            "AS(F11)", "AS(F12)"                 
+        ]
+        }           
+      ]
+    },
+    {
+      "name": "asetniop_arr",
+      "chords": [
+        {
+          "type": "chord_set",
+          "set": "asetniop_arr",
+          "keycodes": [                        
+            "LEFT", "DOWN", "UP", "RIGHT",            
+            "PGUP", "HOME", "PGDN", "END",
+            "PSCR", "SLCK", "PAUS", "NLCK"
+        ]
+        }              
+      ]
+    },
+    {
+      "name": "ball_scroll",
+      "chords": [
+        {
+          "type": "chord_set",
+          "set": "ball_action",
+          "keycodes": [
+            ["A"]
+          ]
+        }               
+              
+      ]
+    },
+    {
+      "name": "ball_volume",
+      "chords": [
+        {
+          "type": "chord_set",
+          "set": "ball_action",
+          "keycodes": [
+          ["A"]
+          ]
+        }               
+              
+      ]
+    },
+    {
+      "name": "asetniop_mods",
+      "chords": [
+        {
+          "type": "chord_set",
+          "set": "asetniop_mods",
+          "keycodes": [                        
+            "KC_LALT", "KC_LCTL", "KC_LSFT"   
+          ]
+        }    
+      ]
+    },
+    {
+      "name": "asetniop_num",
+      "chords": [
+        {
+          "type": "chord_set",
+          "set": "asetniop_num",
+          "keycodes": [                        
+            "P1", "P2", "P3", "P4", "P7", "P8", "P9", "P0",
+            "P5", "P6",
+            "PSLS", "PMNS",
+            "PPLS", "PAST",
+            "PDOT", "PENT"
+          ]
+        }               
+              
+      ]
+    }
+  ],
+  "leader_sequences": [ 
+      {
+        "name": "ls_sshot",
+        "function": "void ls_sshot(void) { SEND_STRING(SS_LSFT(SS_LCMD(\"s\"))); }",
+        "sequence": ["KC_S"]
+      },
+      {
+        "name": "ls_mute",
+        "function": "void ls_mute(void) { tap_key(KC_MUTE); }",
+        "sequence": ["KC_M"]
+      },
+      {
+        "name": "ls_ppause",
+        "function": "void ls_ppause(void) { tap_key(KC_MPLY); }",
+        "sequence": ["KC_P"]
+      },
+      {
+        "name": "ls_winlock",
+        "function": "void ls_winlock(void) { SEND_STRING(SS_LCMD(\"l\")); }",
+        "sequence": ["KC_L"]
+      },
+      {
+        "name": "ls_fbplay",
+        "function": "void ls_fbplay(void) { SEND_STRING(SS_LSFT(SS_LALT(\"P\"))); }",
+        "sequence": ["KC_N"]
+      }     
+  ],
+  "extra_code": "",
+  "extra_dependencies": []
+}
