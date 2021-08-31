@@ -78,12 +78,20 @@ You will have to get all the items from the 'trackball base' plus the ones from 
 
 # **Build guide**
 ## **3D printing**
-Recommended settings for all parts:
+Recommended settings for top part (holding switches etc), bottom not angled and encoder cap:
 *   Layer height 0.2mm
 *   Infill 30%
 *   Use mirroring feature of your slicer to print left half
 *   Supports not needed
+
+Recommended settings for other parts:
+*   Layer height 0.3mm (but if you have time 0.2mm will work just fine too)
+*   Infill 15%
+*   Use mirroring feature of your slicer to print left half
+*   Supports not needed
 *   Print desired trackball module matching your ball size. Bottom part is common for all sizes.
+
+### **I would suggest printing top with the raised thumb and for the bottom part left side: angled 10 deg, and for the right side: flat with/o tracbkall**
 
 
 
