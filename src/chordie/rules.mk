@@ -38,7 +38,11 @@ CUSTOM_MATRIX = yes    # Remote matrix from the wireless bridge
 # NO_USB_STARTUP_CHECK = yes
 POINTING_DEVICE_ENABLE = yes
 
+#uncomment for ADNS9800
 SRC += adns.c matrix.c 
+
+#uncomment for PMW3360
+#SRC += pmw3360.c matrix.c 
 QUANTUM_LIB_SRC += spi_master.c i2c_master.c
 
 
