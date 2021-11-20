@@ -12,7 +12,7 @@ This is my attempt at a chording keyboard. I got inspired by [gBoards' Ginny key
 ## **BOM - base**
 |Item                                       |Count  |Example|
 |:---                                       |:---:  |:---:|
-|MCP23017 I2C Expander Breakout Board       |2      |[Link](https://www.aliexpress.com/item/32957655097.html?spm=a2g0o.productlist.0.0.5e992ef16dybSP&algo_pvid=17c0eef6-10e8-4b1f-b37f-36588a77d8f5&algo_exp_id=17c0eef6-10e8-4b1f-b37f-36588a77d8f5-0)|
+|MCP23017 I2C Expander Breakout Board       |2      |[Link](https://www.aliexpress.com/item/1005002491319987.html?spm=a2g0o.productlist.0.0.69692ef16bL9AS&algo_pvid=409629d1-6323-42fb-83ee-a506b3168261&algo_exp_id=409629d1-6323-42fb-83ee-a506b3168261-25&pdp_ext_f=%7B%22sku_id%22%3A%2212000020851672976%22%7D)|
 |Pro Micro 5V 16MHz                         |1      |[Link](https://www.aliexpress.com/item/32768308647.html?spm=a2g0o.productlist.0.0.2607f202QTTq67&algo_pvid=7ec29e4c-daf6-41db-8152-19ac2f65dfd9&algo_exp_id=7ec29e4c-daf6-41db-8152-19ac2f65dfd9-0)|
 |TRRS Socket PJ-320A                        |4      |[Link](https://www.aliexpress.com/item/4000661212458.html?spm=a2g0o.productlist.0.0.786215bcMDWN6j&algo_pvid=48175f89-cc7c-4d82-9240-efce3152adfa&algo_exp_id=48175f89-cc7c-4d82-9240-efce3152adfa-2)|
 |TRRS Cable Male to Male 0.5m               |2      |[Link](https://www.aliexpress.com/item/32905903526.html?spm=a2g0o.productlist.0.0.4dc47529QkykEs&algo_pvid=9cf4583a-296e-42ce-8e4a-b7ea884c7d69&algo_exp_id=9cf4583a-296e-42ce-8e4a-b7ea884c7d69-0)|
