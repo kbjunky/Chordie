@@ -21,7 +21,7 @@ MOUSEKEY_ENABLE = yes	# Mouse keys(+4700)
 EXTRAKEY_ENABLE = yes	# Audio control and System control(+450)
 #CONSOLE_ENABLE = yes	# Console for debug(+400)
 #COMMAND_ENABLE = yes   # Commands for debug and configuration
-CUSTOM_MATRIX = yes    # Remote matrix from the wireless bridge
+CUSTOM_MATRIX = lite    # Remote matrix from the wireless bridge
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
 # SLEEP_LED_ENABLE = yes  # Breathing sleep LED during USB suspend
 #NKRO_ENABLE = no		# USB Nkey Rollover - not yet supported in LUFA
@@ -37,13 +37,11 @@ CUSTOM_MATRIX = yes    # Remote matrix from the wireless bridge
 #RGBLIGHT_ENABLE = yes
 # NO_USB_STARTUP_CHECK = yes
 POINTING_DEVICE_ENABLE = yes
+POINTING_DEVICE_DRIVER = adns9800
 
-#uncomment for ADNS9800
-SRC += adns.c matrix.c 
+SRC += matrix.c
 
-#uncomment for PMW3360
-#SRC += pmw3360.c matrix.c 
-QUANTUM_LIB_SRC += spi_master.c i2c_master.c
+QUANTUM_LIB_SRC += i2c_master.c
 
 
 

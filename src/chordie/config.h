@@ -21,12 +21,15 @@
 #define DIODE_DIRECTION COL2ROW
 
 /* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 5
+#define DEBOUNCE 0
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
 #define LOCKING_SUPPORT_ENABLE
 /* Locking resynchronize hack */
 #define LOCKING_RESYNC_ENABLE
+#define ADNS9800_CS_PIN 0xF7
+#define POINTING_DEVICE_ROTATION_90
+#define POINTING_DEVICE_INVERT_Y
 
 /*
  * Feature disable options
