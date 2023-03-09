@@ -9,28 +9,29 @@
 #define VENDOR_ID       0xBEEF
 #define PRODUCT_ID      0x6511
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    KBJ
-#define PRODUCT         KBJ Chordie
-#define DESCRIPTION     Come in Chordie they all chord in here
+#define MANUFACTURER    "KBJ"
+#define PRODUCT         "KBJ Chordie"
+#define DESCRIPTION     "Come in Chordie they all chord in here"
 
 /* key matrix size */
 #define MATRIX_ROWS 1
-#define MATRIX_COLS 20
+#define MATRIX_COLS 21
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW
 
 /* Set 0 if debouncing isn't needed */
-#define DEBOUNCE 0
+#define DEBOUNCE 5
 
 /* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
 #define LOCKING_SUPPORT_ENABLE
 /* Locking resynchronize hack */
 #define LOCKING_RESYNC_ENABLE
-#define ADNS9800_CS_PIN 0xF7
-#define POINTING_DEVICE_ROTATION_90
-#define POINTING_DEVICE_INVERT_Y
 
+#define PMW33XX_CS_PIN 0xF7
+#define PMW33XX_CPI 700
+#define POINTING_DEVICE_ROTATION_270
+#define POINTING_DEVICE_INVERT_X
 /*
  * Feature disable options
  *  These options are also useful to firmware size reduction.

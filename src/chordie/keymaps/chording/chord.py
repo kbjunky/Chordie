@@ -124,13 +124,13 @@ def expand_keycode_fnc(DEFINITION):
     elif DEFINITION == "=":
         DEFINITION = "EQUAL"
     elif DEFINITION == "[":
-        DEFINITION = "LBRACKET"
+        DEFINITION = "LEFT_BRACKET"
     elif DEFINITION == "]":
-        DEFINITION = "RBRACKET"
+        DEFINITION = "RIGHT_BRACKET"
     elif DEFINITION == "\\":
         DEFINITION = "BSLASH"
     elif DEFINITION == ";":
-        DEFINITION = "SCOLON"
+        DEFINITION = "SEMICOLON"
     elif DEFINITION == "'":
         DEFINITION = "QUOTE"
     elif DEFINITION == ",":
@@ -205,13 +205,13 @@ def expand_keycode_fnc(DEFINITION):
         "LCBR", "RIGHT_CURLY_BRACE", "RCBR", "PIPE", "COLON",
         "COLN", "DOUBLE_QUOTE", "DQUO", "DQT",
         "LEFT_ANGLE_BRACKET", "LABK", "LT", "RIGHT_ANGLE_BRACKET",
-        "RABK", "GT", "QUESTION", "QUES", "SCOLON", "SCLN",
-        "QUOTE", "QUOT", "LBRACKET", "LBRC", "RBRACKET", "RBRC",
+        "RABK", "GT", "QUESTION", "QUES", "SEMICOLON", "SCLN",
+        "QUOTE", "QUOT", "LEFT_BRACKET", "LBRC", "RIGHT_BRACKET", "RBRC",
         "BSLASH", "BSLS", "MINUS", "MINS", "EQUAL", "EQL",
         "GRAVE", "GRV", "ZKHK", "CAPSLOCK", "CLCK", "CAPS",
-        "SCROLLOCK", "SLCK", "BRMD", "NUMLOCK", "NLCK",
+        "SCROLLOCK", "SCRL", "BRMD", "NUMLOCK", "NUM",
         "LOCKING_CAPS", "LCAP", "LOCKING_NUM", "LNUM",
-        "LOCKING_SCROLL", "LSCR", "LCTRL", "LCTL", "LSHIFT",
+        "LOCKING_SCROLL", "LSCR", "LEFT_CTRL", "LCTL", "LSHIFT",
         "LSFT", "LALT", "LGUI", "LCMD", "LWIN", "RCTRL",
         "RCTL", "RSHIFT", "RSFT", "RALT", "RGUI", "RCMD",
         "RWIN", "INT1", "RO", "INT2", "KANA", "INT3", "JYEN",

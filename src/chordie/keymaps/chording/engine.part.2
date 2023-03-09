@@ -50,10 +50,12 @@ void key_layer_dance(const struct Chord* self) {
             current_pseudolayer = self->value2;
             a_key_went_through = false;
             break;
-        case DEACTIVATED:
+        case DEACTIVATED:if (!a_key_went_through) {
+                tap_key(self->value1);
+            }
         case RESTART:
             if (!a_key_went_through) {
-                tap_key(self->value1);
+                //tap_key(self->value1);
             }
             current_pseudolayer = self->pseudolayer;
             *self->state = IDLE; // does not have effect if the state was RESTART
@@ -329,7 +331,7 @@ void dynamic_macro_play(const struct Chord* self) {
 void string_in(const struct Chord* self) {
     if (*self->state == ACTIVATED) {
         char buffer[STRING_MAX_LENGTH];
-        //strcpy_P(buffer, (char*)pgm_read_word(&(strings[self->value1])));
+        strcpy_P(buffer, (char*)pgm_read_word(&(strings[self->value1])));
         send_string(buffer);
     }
 }

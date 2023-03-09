@@ -140,7 +140,6 @@ def parse_chords(data):
     strings = []
     number_of_strings = 0
     number_of_chords = 0
-    
     for pseudolayer in data["pseudolayers"]:
         name = pseudolayer["name"]
         for chord in pseudolayer["chords"]:
@@ -178,11 +177,31 @@ def parse_chords(data):
     
     keyboard_part_2 += "#define NUMBER_OF_CHORDS " + str(number_of_chords) + "\n"
     keyboard_part_2 += "#define NUMBER_OF_LEADER_COMBOS " + str(len(data["leader_sequences"]))
-    
+   
     return keyboard_part_2 + "\n\n"
 
 def parse_strings_for_chords(data):
     keyboard_part_1 = ""
+    keyboard_part_2 = ""
+    number_of_chords = 0
+    strings = []
+    number_of_strings = 0
+
+    for pseudolayer in data["pseudolayers"]:
+        name = pseudolayer["name"]
+        for chord in pseudolayer["chords"]:
+            if chord["type"] == "chord_set":
+                keycodes = reduce(comma_separator, [word for word in chord["keycodes"]])
+                [keyboard_part_2, number_of_chords, number_of_strings, strings] = add_chord_set(name, keycodes, chord["set"], data, keyboard_part_2, number_of_chords, number_of_strings, strings)
+            if chord["type"] == "visual_array":
+                [keyboard_part_2, number_of_chords, number_of_strings, strings] = add_dictionary(name, chord["keys"], chord["dictionary"], keyboard_part_2, number_of_chords, number_of_strings, strings)
+            if chord["type"] == "visual":
+                keycodes = reduce(comma_separator, [word for word in chord["chord"]])
+                [keyboard_part_2, number_of_chords, number_of_strings, strings] = secret_chord(name, chord["keycode"], keycodes, data, keyboard_part_2, number_of_chords, number_of_strings, strings)
+            elif chord["type"] == "simple":
+                keycodes = reduce(string_sum, ["H_" + word for word in chord["chord"]])
+                [keyboard_part_2, number_of_chords, number_of_strings, strings] = add_key(name, keycodes, chord["keycode"], keyboard_part_2, number_of_chords, number_of_strings, strings)
+    keyboard_part_2 += "\n"
     
     for string, i in zip(strings, range(0, len(strings))):
         keyboard_part_1 += "const char string_" + str(i) + " [] PROGMEM = \"" + string + "\";\n"
@@ -207,7 +226,7 @@ def main():
         
         keyboard_part_0 = parse_keyboard_specifics(data)
         keyboard_part_1 = parse_strings_for_chords(data)
-        keyboard_part_2 = parse_chords(data)
+        keyboard_part_2 = parse_chords(data)        
         
         engine_part_1 = open("engine.part.1", "r").read()
         engine_part_2 = open("engine.part.2", "r").read() + "\n"

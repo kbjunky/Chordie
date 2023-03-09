@@ -1,35 +1,36 @@
 #include QMK_KEYBOARD_H
 
-#define H_ELU ((HASH_TYPE) 1 << 0)
-#define H_ERU ((HASH_TYPE) 1 << 1)
-#define H_ELS ((HASH_TYPE) 1 << 2)
-#define H_ERS ((HASH_TYPE) 1 << 3)
+#define H_IRL ((HASH_TYPE) 1 << 0)
+#define H_IRR ((HASH_TYPE) 1 << 1)
+#define H_ELU ((HASH_TYPE) 1 << 2)
+#define H_ELS ((HASH_TYPE) 1 << 3)
 #define H_ELD ((HASH_TYPE) 1 << 4)
-#define H_ERD ((HASH_TYPE) 1 << 5)
-#define H_kA ((HASH_TYPE) 1 << 6)
-#define H_kS ((HASH_TYPE) 1 << 7)
-#define H_kE ((HASH_TYPE) 1 << 8)
-#define H_kT ((HASH_TYPE) 1 << 9)
-#define H_kN ((HASH_TYPE) 1 << 10)
-#define H_kI ((HASH_TYPE) 1 << 11)
-#define H_kO ((HASH_TYPE) 1 << 12)
-#define H_kP ((HASH_TYPE) 1 << 13)
-#define H_BL1 ((HASH_TYPE) 1 << 14)
-#define H_BR1 ((HASH_TYPE) 1 << 15)
-#define H_TMBL0 ((HASH_TYPE) 1 << 16)
-#define H_TMBR0 ((HASH_TYPE) 1 << 17)
-#define H_TMBL1 ((HASH_TYPE) 1 << 18)
-#define H_TMBR1 ((HASH_TYPE) 1 << 19)
+#define H_kA ((HASH_TYPE) 1 << 5)
+#define H_kS ((HASH_TYPE) 1 << 6)
+#define H_kE ((HASH_TYPE) 1 << 7)
+#define H_kT ((HASH_TYPE) 1 << 8)
+#define H_kN ((HASH_TYPE) 1 << 9)
+#define H_kI ((HASH_TYPE) 1 << 10)
+#define H_kO ((HASH_TYPE) 1 << 11)
+#define H_kP ((HASH_TYPE) 1 << 12)
+#define H_FL ((HASH_TYPE) 1 << 13)
+#define H_FR ((HASH_TYPE) 1 << 14)
+#define H_BL1 ((HASH_TYPE) 1 << 15)
+#define H_BR1 ((HASH_TYPE) 1 << 16)
+#define H_TMBL0 ((HASH_TYPE) 1 << 17)
+#define H_TMBR0 ((HASH_TYPE) 1 << 18)
+#define H_TMBL1 ((HASH_TYPE) 1 << 19)
+#define H_TMBR1 ((HASH_TYPE) 1 << 20)
 
 enum internal_keycodes {
-    ELU = SAFE_RANGE,
-    ERU, ELS, ERS, ELD, ERD, kA, kS, kE, kT, kN, kI, kO, kP, BL1, BR1, TMBL0, TMBR0, TMBL1, TMBR1,
-    FIRST_INTERNAL_KEYCODE = ELU,
+    IRL = SAFE_RANGE,
+    IRR, ELU, ELS, ELD, kA, kS, kE, kT, kN, kI, kO, kP, FL, FR, BL1, BR1, TMBL0, TMBR0, TMBL1, TMBR1,
+    FIRST_INTERNAL_KEYCODE = IRL,
     LAST_INTERNAL_KEYCODE = TMBR1
 };
 
 enum pseudolayers {
-    ALWAYS_ON, ASETNIOP, asetniop_123, asetniop_fn, asetniop_arr, ball_scroll, ball_volume, asetniop_mods, asetniop_num
+    ALWAYS_ON, ASETNIOP, asetniop_123, asetniop_fn, asetniop_arr, ball_scroll, ball_volume, asetniop_mods, asetniop_num, right_ir
 };
 
 #define CHORD_TIMEOUT 100
@@ -42,16 +43,16 @@ enum pseudolayers {
 #define STRING_MAX_LENGTH 16
 #define LEADER_MAX_LENGTH 5
 #define HASH_TYPE uint32_t
-#define NUMBER_OF_KEYS 20
+#define NUMBER_OF_KEYS 21
 #define DEFAULT_PSEUDOLAYER ASETNIOP
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = LAYOUT(ELU, ERU, ELS, ERS, ELD, ERD, kA, kS, kE, kT, kN, kI, kO, kP, BL1, BR1, TMBL0, TMBR0, TMBL1, TMBR1),
+    [0] = LAYOUT(IRL, IRR, ELU, ELS, ELD, kA, kS, kE, kT, kN, kI, kO, kP, FL, FR, BL1, BR1, TMBL0, TMBR0, TMBL1, TMBR1),
 };
 size_t keymapsCount = 1;
 
 uint8_t keycodes_buffer_array[] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
 uint8_t command_buffer[] = {
@@ -155,16 +156,16 @@ bool handle_US_ANSI_shifted_keys(int16_t keycode, bool in) {
             regular_keycode = KC_EQUAL;
             break;
         case KC_LEFT_CURLY_BRACE:
-            regular_keycode = KC_LBRACKET;
+            regular_keycode = KC_LEFT_BRACKET;
             break;
         case KC_RIGHT_CURLY_BRACE:
-            regular_keycode = KC_RBRACKET;
+            regular_keycode = KC_RIGHT_BRACKET;
             break;
         case KC_PIPE:
-            regular_keycode = KC_BSLASH;
+            regular_keycode = KC_BACKSLASH;
             break;
         case KC_COLON:
-            regular_keycode = KC_SCOLON;
+            regular_keycode = KC_SEMICOLON;
             break;
         case KC_DOUBLE_QUOTE:
             regular_keycode = KC_QUOTE;
@@ -230,9 +231,15 @@ void tap_key(int16_t keycode) {
     key_in(keycode);
     wait_ms(TAP_TIMEOUT);
     key_out(keycode);
-}
-const char * const strings[] PROGMEM = {
+}const char string_0 [] PROGMEM = "sz";
+const char string_1 [] PROGMEM = "cz";
+const char string_2 [] PROGMEM = "ch";
+const char string_3 [] PROGMEM = "rz";
+const char string_4 [] PROGMEM = "dz";
+const char string_5 [] PROGMEM = "ze";
 
+const char * const strings[] PROGMEM = {
+    string_0, string_1, string_2, string_3, string_4, string_5
 };
 void single_dance_mouse(const struct Chord* self) {
     report_mouse_t report = pointing_device_get_report();
@@ -286,10 +293,12 @@ void key_layer_dance(const struct Chord* self) {
             current_pseudolayer = self->value2;
             a_key_went_through = false;
             break;
-        case DEACTIVATED:
+        case DEACTIVATED:if (!a_key_went_through) {
+                tap_key(self->value1);
+            }
         case RESTART:
             if (!a_key_went_through) {
-                tap_key(self->value1);
+                //tap_key(self->value1);
             }
             current_pseudolayer = self->pseudolayer;
             *self->state = IDLE; // does not have effect if the state was RESTART
@@ -565,7 +574,7 @@ void dynamic_macro_play(const struct Chord* self) {
 void string_in(const struct Chord* self) {
     if (*self->state == ACTIVATED) {
         char buffer[STRING_MAX_LENGTH];
-        //strcpy_P(buffer, (char*)pgm_read_word(&(strings[self->value1])));
+        strcpy_P(buffer, (char*)pgm_read_word(&(strings[self->value1])));
         send_string(buffer);
     }
 }
@@ -618,323 +627,508 @@ uint8_t state_10 = IDLE;
 uint8_t counter_10 = 0;
 const struct Chord chord_10 PROGMEM = {H_kP, ASETNIOP, &state_10, &counter_10, KC_P, 0, autoshift_dance};
 uint8_t state_11 = IDLE;
-const struct Chord chord_11 PROGMEM = {H_kA + H_kS + H_kE + H_kT, ASETNIOP, &state_11, NULL, KC_TAB, 0, single_dance};
+const struct Chord chord_11 PROGMEM = {H_kA + H_kT + H_kN + H_kP, ASETNIOP, &state_11, NULL, KC_CLEAR, 0, single_dance};
 uint8_t state_12 = IDLE;
-const struct Chord chord_12 PROGMEM = {H_kN + H_kI + H_kO + H_kP, ASETNIOP, &state_12, NULL, KC_ENTER, 0, single_dance};
+const struct Chord chord_12 PROGMEM = {H_kS + H_kE + H_kI + H_kO, ASETNIOP, &state_12, NULL, KC_CAPS, 0, single_dance};
 uint8_t state_13 = IDLE;
-const struct Chord chord_13 PROGMEM = {H_kA + H_kT + H_kN + H_kP, ASETNIOP, &state_13, NULL, KC_CLEAR, 0, single_dance};
+uint8_t counter_13 = 0;
+const struct Chord chord_13 PROGMEM = {H_kA + H_kS, ASETNIOP, &state_13, &counter_13, KC_W, 0, autoshift_dance};
 uint8_t state_14 = IDLE;
-const struct Chord chord_14 PROGMEM = {H_kS + H_kE + H_kI + H_kO, ASETNIOP, &state_14, NULL, KC_CAPS, 0, single_dance};
+uint8_t counter_14 = 0;
+const struct Chord chord_14 PROGMEM = {H_kS + H_kE, ASETNIOP, &state_14, &counter_14, KC_D, 0, autoshift_dance};
 uint8_t state_15 = IDLE;
 uint8_t counter_15 = 0;
-const struct Chord chord_15 PROGMEM = {H_kA + H_kS, ASETNIOP, &state_15, &counter_15, KC_W, 0, autoshift_dance};
+const struct Chord chord_15 PROGMEM = {H_kE + H_kT, ASETNIOP, &state_15, &counter_15, KC_R, 0, autoshift_dance};
 uint8_t state_16 = IDLE;
 uint8_t counter_16 = 0;
-const struct Chord chord_16 PROGMEM = {H_kS + H_kE, ASETNIOP, &state_16, &counter_16, KC_D, 0, autoshift_dance};
+const struct Chord chord_16 PROGMEM = {H_kT + H_kN, ASETNIOP, &state_16, &counter_16, KC_B, 0, autoshift_dance};
 uint8_t state_17 = IDLE;
 uint8_t counter_17 = 0;
-const struct Chord chord_17 PROGMEM = {H_kE + H_kT, ASETNIOP, &state_17, &counter_17, KC_R, 0, autoshift_dance};
+const struct Chord chord_17 PROGMEM = {H_kN + H_kI, ASETNIOP, &state_17, &counter_17, KC_H, 0, autoshift_dance};
 uint8_t state_18 = IDLE;
 uint8_t counter_18 = 0;
-const struct Chord chord_18 PROGMEM = {H_kT + H_kN, ASETNIOP, &state_18, &counter_18, KC_B, 0, autoshift_dance};
+const struct Chord chord_18 PROGMEM = {H_kI + H_kO, ASETNIOP, &state_18, &counter_18, KC_L, 0, autoshift_dance};
 uint8_t state_19 = IDLE;
 uint8_t counter_19 = 0;
-const struct Chord chord_19 PROGMEM = {H_kN + H_kI, ASETNIOP, &state_19, &counter_19, KC_H, 0, autoshift_dance};
+const struct Chord chord_19 PROGMEM = {H_kO + H_kP, ASETNIOP, &state_19, &counter_19, KC_SEMICOLON, 0, autoshift_dance};
 uint8_t state_20 = IDLE;
 uint8_t counter_20 = 0;
-const struct Chord chord_20 PROGMEM = {H_kI + H_kO, ASETNIOP, &state_20, &counter_20, KC_L, 0, autoshift_dance};
+const struct Chord chord_20 PROGMEM = {H_kA + H_kE, ASETNIOP, &state_20, &counter_20, KC_X, 0, autoshift_dance};
 uint8_t state_21 = IDLE;
 uint8_t counter_21 = 0;
-const struct Chord chord_21 PROGMEM = {H_kO + H_kP, ASETNIOP, &state_21, &counter_21, KC_SCOLON, 0, autoshift_dance};
+const struct Chord chord_21 PROGMEM = {H_kS + H_kT, ASETNIOP, &state_21, &counter_21, KC_C, 0, autoshift_dance};
 uint8_t state_22 = IDLE;
 uint8_t counter_22 = 0;
-const struct Chord chord_22 PROGMEM = {H_kA + H_kE, ASETNIOP, &state_22, &counter_22, KC_X, 0, autoshift_dance};
+const struct Chord chord_22 PROGMEM = {H_kE + H_kN, ASETNIOP, &state_22, &counter_22, KC_Y, 0, autoshift_dance};
 uint8_t state_23 = IDLE;
 uint8_t counter_23 = 0;
-const struct Chord chord_23 PROGMEM = {H_kS + H_kT, ASETNIOP, &state_23, &counter_23, KC_C, 0, autoshift_dance};
+const struct Chord chord_23 PROGMEM = {H_kT + H_kI, ASETNIOP, &state_23, &counter_23, KC_V, 0, autoshift_dance};
 uint8_t state_24 = IDLE;
 uint8_t counter_24 = 0;
-const struct Chord chord_24 PROGMEM = {H_kE + H_kN, ASETNIOP, &state_24, &counter_24, KC_Y, 0, autoshift_dance};
+const struct Chord chord_24 PROGMEM = {H_kN + H_kO, ASETNIOP, &state_24, &counter_24, KC_U, 0, autoshift_dance};
 uint8_t state_25 = IDLE;
-uint8_t counter_25 = 0;
-const struct Chord chord_25 PROGMEM = {H_kT + H_kI, ASETNIOP, &state_25, &counter_25, KC_V, 0, autoshift_dance};
+const struct Chord chord_25 PROGMEM = {H_kI + H_kP, ASETNIOP, &state_25, NULL, KC_LGUI, 0, single_dance};
 uint8_t state_26 = IDLE;
 uint8_t counter_26 = 0;
-const struct Chord chord_26 PROGMEM = {H_kN + H_kO, ASETNIOP, &state_26, &counter_26, KC_U, 0, autoshift_dance};
+const struct Chord chord_26 PROGMEM = {H_kA + H_kT, ASETNIOP, &state_26, &counter_26, KC_F, 0, autoshift_dance};
 uint8_t state_27 = IDLE;
-const struct Chord chord_27 PROGMEM = {H_kI + H_kP, ASETNIOP, &state_27, NULL, KC_LGUI, 0, single_dance};
+uint8_t counter_27 = 0;
+const struct Chord chord_27 PROGMEM = {H_kS + H_kN, ASETNIOP, &state_27, &counter_27, KC_J, 0, autoshift_dance};
 uint8_t state_28 = IDLE;
 uint8_t counter_28 = 0;
-const struct Chord chord_28 PROGMEM = {H_kA + H_kT, ASETNIOP, &state_28, &counter_28, KC_F, 0, autoshift_dance};
+const struct Chord chord_28 PROGMEM = {H_kE + H_kI, ASETNIOP, &state_28, &counter_28, KC_COMMA, 0, autoshift_dance};
 uint8_t state_29 = IDLE;
 uint8_t counter_29 = 0;
-const struct Chord chord_29 PROGMEM = {H_kS + H_kN, ASETNIOP, &state_29, &counter_29, KC_J, 0, autoshift_dance};
+const struct Chord chord_29 PROGMEM = {H_kT + H_kO, ASETNIOP, &state_29, &counter_29, KC_G, 0, autoshift_dance};
 uint8_t state_30 = IDLE;
 uint8_t counter_30 = 0;
-const struct Chord chord_30 PROGMEM = {H_kE + H_kI, ASETNIOP, &state_30, &counter_30, KC_COMMA, 0, autoshift_dance};
+const struct Chord chord_30 PROGMEM = {H_kN + H_kP, ASETNIOP, &state_30, &counter_30, KC_M, 0, autoshift_dance};
 uint8_t state_31 = IDLE;
 uint8_t counter_31 = 0;
-const struct Chord chord_31 PROGMEM = {H_kT + H_kO, ASETNIOP, &state_31, &counter_31, KC_G, 0, autoshift_dance};
+const struct Chord chord_31 PROGMEM = {H_kA + H_kN, ASETNIOP, &state_31, &counter_31, KC_Q, 0, autoshift_dance};
 uint8_t state_32 = IDLE;
 uint8_t counter_32 = 0;
-const struct Chord chord_32 PROGMEM = {H_kN + H_kP, ASETNIOP, &state_32, &counter_32, KC_M, 0, autoshift_dance};
+const struct Chord chord_32 PROGMEM = {H_kS + H_kI, ASETNIOP, &state_32, &counter_32, KC_K, 0, autoshift_dance};
 uint8_t state_33 = IDLE;
 uint8_t counter_33 = 0;
-const struct Chord chord_33 PROGMEM = {H_kA + H_kN, ASETNIOP, &state_33, &counter_33, KC_Q, 0, autoshift_dance};
+const struct Chord chord_33 PROGMEM = {H_kE + H_kO, ASETNIOP, &state_33, &counter_33, KC_MINUS, 0, autoshift_dance};
 uint8_t state_34 = IDLE;
-uint8_t counter_34 = 0;
-const struct Chord chord_34 PROGMEM = {H_kS + H_kI, ASETNIOP, &state_34, &counter_34, KC_K, 0, autoshift_dance};
+const struct Chord chord_34 PROGMEM = {H_kT + H_kP, ASETNIOP, &state_34, NULL, KC_BSPC, 0, single_dance};
 uint8_t state_35 = IDLE;
 uint8_t counter_35 = 0;
-const struct Chord chord_35 PROGMEM = {H_kE + H_kO, ASETNIOP, &state_35, &counter_35, KC_MINUS, 0, autoshift_dance};
+const struct Chord chord_35 PROGMEM = {H_kA + H_kI, ASETNIOP, &state_35, &counter_35, KC_Z, 0, autoshift_dance};
 uint8_t state_36 = IDLE;
-const struct Chord chord_36 PROGMEM = {H_kT + H_kP, ASETNIOP, &state_36, NULL, KC_BSPC, 0, single_dance};
+uint8_t counter_36 = 0;
+const struct Chord chord_36 PROGMEM = {H_kS + H_kO, ASETNIOP, &state_36, &counter_36, KC_DOT, 0, autoshift_dance};
 uint8_t state_37 = IDLE;
 uint8_t counter_37 = 0;
-const struct Chord chord_37 PROGMEM = {H_kA + H_kI, ASETNIOP, &state_37, &counter_37, KC_Z, 0, autoshift_dance};
+const struct Chord chord_37 PROGMEM = {H_kE + H_kP, ASETNIOP, &state_37, &counter_37, KC_QUOTE, 0, autoshift_dance};
 uint8_t state_38 = IDLE;
 uint8_t counter_38 = 0;
-const struct Chord chord_38 PROGMEM = {H_kS + H_kO, ASETNIOP, &state_38, &counter_38, KC_DOT, 0, autoshift_dance};
+const struct Chord chord_38 PROGMEM = {H_kA + H_kO, ASETNIOP, &state_38, &counter_38, KC_LEFT_BRACKET, 0, autoshift_dance};
 uint8_t state_39 = IDLE;
 uint8_t counter_39 = 0;
-const struct Chord chord_39 PROGMEM = {H_kE + H_kP, ASETNIOP, &state_39, &counter_39, KC_QUOTE, 0, autoshift_dance};
+const struct Chord chord_39 PROGMEM = {H_kS + H_kP, ASETNIOP, &state_39, &counter_39, KC_RIGHT_BRACKET, 0, autoshift_dance};
 uint8_t state_40 = IDLE;
 uint8_t counter_40 = 0;
-const struct Chord chord_40 PROGMEM = {H_kA + H_kO, ASETNIOP, &state_40, &counter_40, KC_LBRACKET, 0, autoshift_dance};
+const struct Chord chord_40 PROGMEM = {H_kA + H_kP, ASETNIOP, &state_40, &counter_40, KC_SLASH, 0, autoshift_dance};
 uint8_t state_41 = IDLE;
 uint8_t counter_41 = 0;
-const struct Chord chord_41 PROGMEM = {H_kS + H_kP, ASETNIOP, &state_41, &counter_41, KC_RBRACKET, 0, autoshift_dance};
+const struct Chord chord_41 PROGMEM = {H_TMBR0, ASETNIOP, &state_41, &counter_41, KC_SPACE, asetniop_arr, key_layer_dance};
 uint8_t state_42 = IDLE;
 uint8_t counter_42 = 0;
-const struct Chord chord_42 PROGMEM = {H_kA + H_kP, ASETNIOP, &state_42, &counter_42, KC_SLASH, 0, autoshift_dance};
+const struct Chord chord_42 PROGMEM = {H_TMBR1, ASETNIOP, &state_42, &counter_42, KC_DEL, asetniop_123, key_layer_dance};
 uint8_t state_43 = IDLE;
-uint8_t counter_43 = 0;
-const struct Chord chord_43 PROGMEM = {H_TMBR0, ASETNIOP, &state_43, &counter_43, KC_SPACE, asetniop_arr, key_layer_dance};
+const struct Chord chord_43 PROGMEM = {H_TMBL0 + H_TMBR0, ASETNIOP, &state_43, NULL, asetniop_num, 0, temp_pseudolayer};
 uint8_t state_44 = IDLE;
-uint8_t counter_44 = 0;
-const struct Chord chord_44 PROGMEM = {H_TMBR1, ASETNIOP, &state_44, &counter_44, KC_DEL, asetniop_123, key_layer_dance};
+const struct Chord chord_44 PROGMEM = {H_TMBL1 + H_TMBR1, ASETNIOP, &state_44, NULL, asetniop_fn, 0, temp_pseudolayer};
 uint8_t state_45 = IDLE;
-uint8_t counter_45 = 0;
-const struct Chord chord_45 PROGMEM = {H_TMBL0 + H_TMBR0, ASETNIOP, &state_45, &counter_45, KC_ENTER, asetniop_num, key_layer_dance};
+const struct Chord chord_45 PROGMEM = {H_kT + H_kN + H_kI, ASETNIOP, &state_45, NULL, KC_LSFT, 0, one_shot_key};
 uint8_t state_46 = IDLE;
-uint8_t counter_46 = 0;
-const struct Chord chord_46 PROGMEM = {H_TMBL1 + H_TMBR1, ASETNIOP, &state_46, &counter_46, KC_ESC, asetniop_fn, key_layer_dance};
+const struct Chord chord_46 PROGMEM = {H_kT + H_kI + H_kO, ASETNIOP, &state_46, NULL, KC_LCTL, 0, one_shot_key};
 uint8_t state_47 = IDLE;
-const struct Chord chord_47 PROGMEM = {H_kT + H_kN + H_kI, ASETNIOP, &state_47, NULL, KC_LSFT, 0, one_shot_key};
+const struct Chord chord_47 PROGMEM = {H_kT + H_kN + H_kO, ASETNIOP, &state_47, NULL, KC_LALT, 0, one_shot_key};
 uint8_t state_48 = IDLE;
-const struct Chord chord_48 PROGMEM = {H_kT + H_kI + H_kO, ASETNIOP, &state_48, NULL, KC_LCTL, 0, one_shot_key};
+const struct Chord chord_48 PROGMEM = {H_kT + H_kI + H_kP, ASETNIOP, &state_48, NULL, KC_LGUI, 0, one_shot_key};
 uint8_t state_49 = IDLE;
-const struct Chord chord_49 PROGMEM = {H_kT + H_kN + H_kO, ASETNIOP, &state_49, NULL, KC_LALT, 0, one_shot_key};
+const struct Chord chord_49 PROGMEM = {H_kE + H_kN + H_kI, ASETNIOP, &state_49, NULL, KC_RSFT, 0, one_shot_key};
 uint8_t state_50 = IDLE;
-const struct Chord chord_50 PROGMEM = {H_kT + H_kN + H_kI + H_kP, ASETNIOP, &state_50, NULL, KC_LGUI, 0, one_shot_key};
+const struct Chord chord_50 PROGMEM = {H_kE + H_kI + H_kO, ASETNIOP, &state_50, NULL, KC_RCTL, 0, one_shot_key};
 uint8_t state_51 = IDLE;
-const struct Chord chord_51 PROGMEM = {H_kE + H_kN + H_kI, ASETNIOP, &state_51, NULL, KC_RSFT, 0, one_shot_key};
+const struct Chord chord_51 PROGMEM = {H_kE + H_kN + H_kO, ASETNIOP, &state_51, NULL, KC_RALT, 0, one_shot_key};
 uint8_t state_52 = IDLE;
-const struct Chord chord_52 PROGMEM = {H_kE + H_kI + H_kO, ASETNIOP, &state_52, NULL, KC_RCTL, 0, one_shot_key};
+const struct Chord chord_52 PROGMEM = {H_kE + H_kI + H_kP, ASETNIOP, &state_52, NULL, KC_RGUI, 0, one_shot_key};
 uint8_t state_53 = IDLE;
-const struct Chord chord_53 PROGMEM = {H_kE + H_kN + H_kO, ASETNIOP, &state_53, NULL, KC_RALT, 0, one_shot_key};
+uint8_t counter_53 = 0;
+const struct Chord chord_53 PROGMEM = {H_TMBL0 + H_kA, ASETNIOP, &state_53, &counter_53, KC_ESC, ball_scroll, key_layer_dance};
 uint8_t state_54 = IDLE;
-const struct Chord chord_54 PROGMEM = {H_kE + H_kN + H_kI + H_kP, ASETNIOP, &state_54, NULL, KC_RGUI, 0, one_shot_key};
+const struct Chord chord_54 PROGMEM = {H_TMBL1 + H_kT, ASETNIOP, &state_54, NULL, ball_volume, 0, temp_pseudolayer};
 uint8_t state_55 = IDLE;
-const struct Chord chord_55 PROGMEM = {H_TMBL0 + H_kT, ASETNIOP, &state_55, NULL, ball_scroll, 0, temp_pseudolayer};
+uint8_t counter_55 = 0;
+const struct Chord chord_55 PROGMEM = {H_kA + H_kS + H_kE, ASETNIOP, &state_55, &counter_55, KC_GRV, 0, autoshift_dance};
 uint8_t state_56 = IDLE;
-const struct Chord chord_56 PROGMEM = {H_TMBL1 + H_kT, ASETNIOP, &state_56, NULL, ball_volume, 0, temp_pseudolayer};
+uint8_t counter_56 = 0;
+const struct Chord chord_56 PROGMEM = {H_kS + H_kE + H_kT, ASETNIOP, &state_56, &counter_56, KC_BSLS, 0, autoshift_dance};
 uint8_t state_57 = IDLE;
 uint8_t counter_57 = 0;
-const struct Chord chord_57 PROGMEM = {H_kA + H_kS + H_kE, ASETNIOP, &state_57, &counter_57, KC_GRV, 0, autoshift_dance};
+const struct Chord chord_57 PROGMEM = {H_kN + H_kI + H_kO, ASETNIOP, &state_57, &counter_57, KC_EQUAL, 0, autoshift_dance};
 uint8_t state_58 = IDLE;
-uint8_t counter_58 = 0;
-const struct Chord chord_58 PROGMEM = {H_kS + H_kE + H_kT, ASETNIOP, &state_58, &counter_58, KC_BSLS, 0, autoshift_dance};
+const struct Chord chord_58 PROGMEM = {H_kI + H_kO + H_kP, ASETNIOP, &state_58, NULL, KC_ESC, 0, single_dance};
 uint8_t state_59 = IDLE;
-uint8_t counter_59 = 0;
-const struct Chord chord_59 PROGMEM = {H_kN + H_kI + H_kO, ASETNIOP, &state_59, &counter_59, KC_EQUAL, 0, autoshift_dance};
+const struct Chord chord_59 PROGMEM = {H_kI + H_kE + H_kT, ASETNIOP, &state_59, NULL, KC_INS, 0, single_dance};
 uint8_t state_60 = IDLE;
-const struct Chord chord_60 PROGMEM = {H_kI + H_kO + H_kP, ASETNIOP, &state_60, NULL, KC_ESC, 0, single_dance};
+const struct Chord chord_60 PROGMEM = {H_kE + H_kT + H_kN + H_kI, ASETNIOP, &state_60, NULL, 0, 0, leader};
 uint8_t state_61 = IDLE;
-const struct Chord chord_61 PROGMEM = {H_kI + H_kE + H_kT, ASETNIOP, &state_61, NULL, KC_INS, 0, single_dance};
+const struct Chord chord_61 PROGMEM = {H_kA + H_kS + H_kO + H_kP, ASETNIOP, &state_61, NULL, 0, 0, lock};
 uint8_t state_62 = IDLE;
-const struct Chord chord_62 PROGMEM = {H_kE + H_kT + H_kN + H_kI, ASETNIOP, &state_62, NULL, 0, 0, leader};
+const struct Chord chord_62 PROGMEM = {H_kA + H_kS + H_kE + H_kT + H_kN + H_kI + H_kO + H_kP, ASETNIOP, &state_62, NULL, 0, 0, reset};
 uint8_t state_63 = IDLE;
-const struct Chord chord_63 PROGMEM = {H_kA + H_kS + H_kO + H_kP, ASETNIOP, &state_63, NULL, 0, 0, lock};
+const struct Chord chord_63 PROGMEM = {H_kA + H_FR, ASETNIOP, &state_63, NULL, 0, 0, string_in};
 uint8_t state_64 = IDLE;
-const struct Chord chord_64 PROGMEM = {H_BR1, ASETNIOP, &state_64, NULL, KC_ESC, 0, single_dance};
+const struct Chord chord_64 PROGMEM = {H_kS + H_FR, ASETNIOP, &state_64, NULL, 1, 0, string_in};
 uint8_t state_65 = IDLE;
-const struct Chord chord_65 PROGMEM = {H_ELU, ASETNIOP, &state_65, NULL, KC_VOLU, 0, single_dance};
+const struct Chord chord_65 PROGMEM = {H_kE + H_FR, ASETNIOP, &state_65, NULL, 2, 0, string_in};
 uint8_t state_66 = IDLE;
-const struct Chord chord_66 PROGMEM = {H_ERU, ASETNIOP, &state_66, NULL, KC_WH_U, 0, single_dance};
+const struct Chord chord_66 PROGMEM = {H_kT + H_FR, ASETNIOP, &state_66, NULL, 3, 0, string_in};
 uint8_t state_67 = IDLE;
-const struct Chord chord_67 PROGMEM = {H_ELS, ASETNIOP, &state_67, NULL, KC_MUTE, 0, single_dance};
+const struct Chord chord_67 PROGMEM = {H_FL + H_kN, ASETNIOP, &state_67, NULL, 4, 0, string_in};
 uint8_t state_68 = IDLE;
-const struct Chord chord_68 PROGMEM = {H_ERS, ASETNIOP, &state_68, NULL, MOUSE_BTN2, 0, single_dance_mouse};
+const struct Chord chord_68 PROGMEM = {H_FL + H_kI, ASETNIOP, &state_68, NULL, 5, 0, string_in};
 uint8_t state_69 = IDLE;
-const struct Chord chord_69 PROGMEM = {H_ELD, ASETNIOP, &state_69, NULL, KC_VOLD, 0, single_dance};
+const struct Chord chord_69 PROGMEM = {H_TMBL0 + H_kA, ASETNIOP, &state_69, NULL, KC_ESC, 0, single_dance};
 uint8_t state_70 = IDLE;
-const struct Chord chord_70 PROGMEM = {H_ERD, ASETNIOP, &state_70, NULL, KC_WH_D, 0, single_dance};
+const struct Chord chord_70 PROGMEM = {H_TMBL0 + H_kT, ASETNIOP, &state_70, NULL, KC_TAB, 0, single_dance};
 uint8_t state_71 = IDLE;
-const struct Chord chord_71 PROGMEM = {H_kA + H_kS + H_kE + H_kT + H_kN + H_kI + H_kO + H_kP, ASETNIOP, &state_71, NULL, 0, 0, reset};
+const struct Chord chord_71 PROGMEM = {H_TMBR0 + H_kN, ASETNIOP, &state_71, NULL, KC_ENTER, 0, single_dance};
+void function_72(const struct Chord* self) {
+    switch (*self->state) {
+        case ACTIVATED:
+            key_in(KC_LCMD);
+            key_in(KC_LCTL);
+            key_in(KC_LEFT);
+            break;
+        case DEACTIVATED:
+            key_out(KC_LCMD);
+            key_out(KC_LCTL);
+            key_out(KC_LEFT);
+            *self->state = IDLE;
+            break;
+        case RESTART:
+            key_out(KC_LCMD);
+            key_out(KC_LCTL);
+            key_out(KC_LEFT);
+            break;
+        default:
+            break;
+    };
+}
 uint8_t state_72 = IDLE;
 uint8_t counter_72 = 0;
-const struct Chord chord_72 PROGMEM = {H_kA, asetniop_123, &state_72, &counter_72, KC_1, 0, autoshift_dance};
+const struct Chord chord_72 PROGMEM = {H_FL, ASETNIOP, &state_72, &counter_72, 0, 0, function_72};
+void function_73(const struct Chord* self) {
+    switch (*self->state) {
+        case ACTIVATED:
+            key_in(KC_LCMD);
+            key_in(KC_LCTL);
+            key_in(KC_RIGHT);
+            break;
+        case DEACTIVATED:
+            key_out(KC_LCMD);
+            key_out(KC_LCTL);
+            key_out(KC_RIGHT);
+            *self->state = IDLE;
+            break;
+        case RESTART:
+            key_out(KC_LCMD);
+            key_out(KC_LCTL);
+            key_out(KC_RIGHT);
+            break;
+        default:
+            break;
+    };
+}
 uint8_t state_73 = IDLE;
 uint8_t counter_73 = 0;
-const struct Chord chord_73 PROGMEM = {H_kS, asetniop_123, &state_73, &counter_73, KC_2, 0, autoshift_dance};
+const struct Chord chord_73 PROGMEM = {H_FR, ASETNIOP, &state_73, &counter_73, 0, 0, function_73};
+void function_74(const struct Chord* self) {
+    switch (*self->state) {
+        case ACTIVATED:
+            key_in(KC_LCMD);
+            key_in(KC_TAB);
+            break;
+        case DEACTIVATED:
+            key_out(KC_LCMD);
+            key_out(KC_TAB);
+            *self->state = IDLE;
+            break;
+        case RESTART:
+            key_out(KC_LCMD);
+            key_out(KC_TAB);
+            break;
+        default:
+            break;
+    };
+}
 uint8_t state_74 = IDLE;
 uint8_t counter_74 = 0;
-const struct Chord chord_74 PROGMEM = {H_kE, asetniop_123, &state_74, &counter_74, KC_3, 0, autoshift_dance};
+const struct Chord chord_74 PROGMEM = {H_FL + H_FR, ASETNIOP, &state_74, &counter_74, 0, 0, function_74};
 uint8_t state_75 = IDLE;
-uint8_t counter_75 = 0;
-const struct Chord chord_75 PROGMEM = {H_kT, asetniop_123, &state_75, &counter_75, KC_4, 0, autoshift_dance};
+const struct Chord chord_75 PROGMEM = {H_BL1 + H_kA, ASETNIOP, &state_75, NULL, KC_EXCLAIM, 0, single_dance};
 uint8_t state_76 = IDLE;
-uint8_t counter_76 = 0;
-const struct Chord chord_76 PROGMEM = {H_kN, asetniop_123, &state_76, &counter_76, KC_7, 0, autoshift_dance};
+const struct Chord chord_76 PROGMEM = {H_BL1 + H_kS, ASETNIOP, &state_76, NULL, KC_AT, 0, single_dance};
 uint8_t state_77 = IDLE;
-uint8_t counter_77 = 0;
-const struct Chord chord_77 PROGMEM = {H_kI, asetniop_123, &state_77, &counter_77, KC_8, 0, autoshift_dance};
+const struct Chord chord_77 PROGMEM = {H_BL1 + H_kE, ASETNIOP, &state_77, NULL, KC_HASH, 0, single_dance};
 uint8_t state_78 = IDLE;
-uint8_t counter_78 = 0;
-const struct Chord chord_78 PROGMEM = {H_kO, asetniop_123, &state_78, &counter_78, KC_9, 0, autoshift_dance};
+const struct Chord chord_78 PROGMEM = {H_BL1 + H_kT, ASETNIOP, &state_78, NULL, KC_DOLLAR, 0, single_dance};
 uint8_t state_79 = IDLE;
-uint8_t counter_79 = 0;
-const struct Chord chord_79 PROGMEM = {H_kP, asetniop_123, &state_79, &counter_79, KC_0, 0, autoshift_dance};
+const struct Chord chord_79 PROGMEM = {H_BL1 + H_kE + H_kT, ASETNIOP, &state_79, NULL, KC_PERCENT, 0, single_dance};
 uint8_t state_80 = IDLE;
-uint8_t counter_80 = 0;
-const struct Chord chord_80 PROGMEM = {H_kE + H_kT, asetniop_123, &state_80, &counter_80, KC_5, 0, autoshift_dance};
+const struct Chord chord_80 PROGMEM = {H_BR1 + H_kN + H_kI, ASETNIOP, &state_80, NULL, KC_CIRCUMFLEX, 0, single_dance};
 uint8_t state_81 = IDLE;
-uint8_t counter_81 = 0;
-const struct Chord chord_81 PROGMEM = {H_kN + H_kI, asetniop_123, &state_81, &counter_81, KC_6, 0, autoshift_dance};
+const struct Chord chord_81 PROGMEM = {H_BR1 + H_kN, ASETNIOP, &state_81, NULL, KC_AMPERSAND, 0, single_dance};
 uint8_t state_82 = IDLE;
-uint8_t counter_82 = 0;
-const struct Chord chord_82 PROGMEM = {H_kS + H_kE, asetniop_123, &state_82, &counter_82, KC_GRV, 0, autoshift_dance};
+const struct Chord chord_82 PROGMEM = {H_BR1 + H_kI, ASETNIOP, &state_82, NULL, KC_ASTERISK, 0, single_dance};
 uint8_t state_83 = IDLE;
-uint8_t counter_83 = 0;
-const struct Chord chord_83 PROGMEM = {H_kI + H_kO, asetniop_123, &state_83, &counter_83, KC_BSLS, 0, autoshift_dance};
+const struct Chord chord_83 PROGMEM = {H_BR1 + H_kO, ASETNIOP, &state_83, NULL, KC_LPRN, 0, single_dance};
 uint8_t state_84 = IDLE;
-uint8_t counter_84 = 0;
-const struct Chord chord_84 PROGMEM = {H_kA, asetniop_fn, &state_84, &counter_84, KC_F1, 0, autoshift_dance};
+const struct Chord chord_84 PROGMEM = {H_BR1 + H_kP, ASETNIOP, &state_84, NULL, KC_RPRN, 0, single_dance};
 uint8_t state_85 = IDLE;
-uint8_t counter_85 = 0;
-const struct Chord chord_85 PROGMEM = {H_kS, asetniop_fn, &state_85, &counter_85, KC_F2, 0, autoshift_dance};
+const struct Chord chord_85 PROGMEM = {H_BL1 + H_FL, ASETNIOP, &state_85, NULL, KC_PERCENT, 0, single_dance};
 uint8_t state_86 = IDLE;
-uint8_t counter_86 = 0;
-const struct Chord chord_86 PROGMEM = {H_kE, asetniop_fn, &state_86, &counter_86, KC_F3, 0, autoshift_dance};
+const struct Chord chord_86 PROGMEM = {H_BR1 + H_FR, ASETNIOP, &state_86, NULL, KC_CIRCUMFLEX, 0, single_dance};
 uint8_t state_87 = IDLE;
-uint8_t counter_87 = 0;
-const struct Chord chord_87 PROGMEM = {H_kT, asetniop_fn, &state_87, &counter_87, KC_F4, 0, autoshift_dance};
+const struct Chord chord_87 PROGMEM = {H_BR1 + H_kE + H_kP, ASETNIOP, &state_87, NULL, KC_DOUBLE_QUOTE, 0, single_dance};
 uint8_t state_88 = IDLE;
-uint8_t counter_88 = 0;
-const struct Chord chord_88 PROGMEM = {H_kN, asetniop_fn, &state_88, &counter_88, KC_F7, 0, autoshift_dance};
+const struct Chord chord_88 PROGMEM = {H_BR1 + H_kO + H_kP, ASETNIOP, &state_88, NULL, KC_COLON, 0, single_dance};
 uint8_t state_89 = IDLE;
-uint8_t counter_89 = 0;
-const struct Chord chord_89 PROGMEM = {H_kI, asetniop_fn, &state_89, &counter_89, KC_F8, 0, autoshift_dance};
+const struct Chord chord_89 PROGMEM = {H_BR1 + H_kE + H_kI, ASETNIOP, &state_89, NULL, KC_LEFT_ANGLE_BRACKET, 0, single_dance};
 uint8_t state_90 = IDLE;
-uint8_t counter_90 = 0;
-const struct Chord chord_90 PROGMEM = {H_kO, asetniop_fn, &state_90, &counter_90, KC_F9, 0, autoshift_dance};
+const struct Chord chord_90 PROGMEM = {H_BR1 + H_kS + H_kO, ASETNIOP, &state_90, NULL, KC_RIGHT_ANGLE_BRACKET, 0, single_dance};
 uint8_t state_91 = IDLE;
-uint8_t counter_91 = 0;
-const struct Chord chord_91 PROGMEM = {H_kP, asetniop_fn, &state_91, &counter_91, KC_F10, 0, autoshift_dance};
+const struct Chord chord_91 PROGMEM = {H_BR1 + H_kA + H_kP, ASETNIOP, &state_91, NULL, KC_QUESTION, 0, single_dance};
 uint8_t state_92 = IDLE;
-uint8_t counter_92 = 0;
-const struct Chord chord_92 PROGMEM = {H_kE + H_kT, asetniop_fn, &state_92, &counter_92, KC_F5, 0, autoshift_dance};
+const struct Chord chord_92 PROGMEM = {H_BR1 + H_kA + H_kO, ASETNIOP, &state_92, NULL, KC_LEFT_CURLY_BRACE, 0, single_dance};
 uint8_t state_93 = IDLE;
-uint8_t counter_93 = 0;
-const struct Chord chord_93 PROGMEM = {H_kN + H_kI, asetniop_fn, &state_93, &counter_93, KC_F6, 0, autoshift_dance};
+const struct Chord chord_93 PROGMEM = {H_BR1 + H_kS + H_kP, ASETNIOP, &state_93, NULL, KC_RIGHT_CURLY_BRACE, 0, single_dance};
 uint8_t state_94 = IDLE;
-uint8_t counter_94 = 0;
-const struct Chord chord_94 PROGMEM = {H_kS + H_kE, asetniop_fn, &state_94, &counter_94, KC_F11, 0, autoshift_dance};
+const struct Chord chord_94 PROGMEM = {H_BR1 + H_kE + H_kO, ASETNIOP, &state_94, NULL, KC_UNDERSCORE, 0, single_dance};
 uint8_t state_95 = IDLE;
-uint8_t counter_95 = 0;
-const struct Chord chord_95 PROGMEM = {H_kI + H_kO, asetniop_fn, &state_95, &counter_95, KC_F12, 0, autoshift_dance};
+const struct Chord chord_95 PROGMEM = {H_BR1 + H_kA + H_kS + H_kE, ASETNIOP, &state_95, NULL, KC_TILDE, 0, single_dance};
 uint8_t state_96 = IDLE;
-const struct Chord chord_96 PROGMEM = {H_kN, asetniop_arr, &state_96, NULL, KC_LEFT, 0, single_dance};
+const struct Chord chord_96 PROGMEM = {H_BR1 + H_kS + H_kE + H_kT, ASETNIOP, &state_96, NULL, KC_PIPE, 0, single_dance};
 uint8_t state_97 = IDLE;
-const struct Chord chord_97 PROGMEM = {H_kI, asetniop_arr, &state_97, NULL, KC_DOWN, 0, single_dance};
+const struct Chord chord_97 PROGMEM = {H_BR1 + H_kN + H_kI + H_kO, ASETNIOP, &state_97, NULL, KC_PLUS, 0, single_dance};
+void function_98(const struct Chord* self) {
+    switch (*self->state) {
+        case ACTIVATED:
+            key_in(KC_LALT);
+            key_in(KC_F4);
+            break;
+        case DEACTIVATED:
+            key_out(KC_LALT);
+            key_out(KC_F4);
+            *self->state = IDLE;
+            break;
+        case RESTART:
+            key_out(KC_LALT);
+            key_out(KC_F4);
+            break;
+        default:
+            break;
+    };
+}
 uint8_t state_98 = IDLE;
-const struct Chord chord_98 PROGMEM = {H_kO, asetniop_arr, &state_98, NULL, KC_UP, 0, single_dance};
+uint8_t counter_98 = 0;
+const struct Chord chord_98 PROGMEM = {H_TMBL1 + H_kA, ASETNIOP, &state_98, &counter_98, 0, 0, function_98};
 uint8_t state_99 = IDLE;
-const struct Chord chord_99 PROGMEM = {H_kP, asetniop_arr, &state_99, NULL, KC_RIGHT, 0, single_dance};
+const struct Chord chord_99 PROGMEM = {H_TMBL1 + H_kS, ASETNIOP, &state_99, NULL, KC_WBAK, 0, single_dance};
+void function_100(const struct Chord* self) {
+    switch (*self->state) {
+        case ACTIVATED:
+            key_in(KC_LCTL);
+            key_in(KC_W);
+            break;
+        case DEACTIVATED:
+            key_out(KC_LCTL);
+            key_out(KC_W);
+            *self->state = IDLE;
+            break;
+        case RESTART:
+            key_out(KC_LCTL);
+            key_out(KC_W);
+            break;
+        default:
+            break;
+    };
+}
 uint8_t state_100 = IDLE;
-const struct Chord chord_100 PROGMEM = {H_kN + H_kI, asetniop_arr, &state_100, NULL, KC_PGUP, 0, single_dance};
+uint8_t counter_100 = 0;
+const struct Chord chord_100 PROGMEM = {H_TMBL1 + H_kE, ASETNIOP, &state_100, &counter_100, 0, 0, function_100};
 uint8_t state_101 = IDLE;
-const struct Chord chord_101 PROGMEM = {H_kI + H_kO, asetniop_arr, &state_101, NULL, KC_HOME, 0, single_dance};
+const struct Chord chord_101 PROGMEM = {H_BR1, ASETNIOP, &state_101, NULL, KC_INS, 0, single_dance};
 uint8_t state_102 = IDLE;
-const struct Chord chord_102 PROGMEM = {H_kO + H_kP, asetniop_arr, &state_102, NULL, KC_PGDN, 0, single_dance};
+const struct Chord chord_102 PROGMEM = {H_IRL, ASETNIOP, &state_102, NULL, ball_scroll, 0, temp_pseudolayer};
 uint8_t state_103 = IDLE;
-const struct Chord chord_103 PROGMEM = {H_kN + H_kP, asetniop_arr, &state_103, NULL, KC_END, 0, single_dance};
+const struct Chord chord_103 PROGMEM = {H_IRR, ASETNIOP, &state_103, NULL, right_ir, 0, temp_pseudolayer};
 uint8_t state_104 = IDLE;
-const struct Chord chord_104 PROGMEM = {H_kA, asetniop_arr, &state_104, NULL, KC_PSCR, 0, single_dance};
+const struct Chord chord_104 PROGMEM = {H_ELU, ASETNIOP, &state_104, NULL, KC_WH_U, 0, single_dance};
 uint8_t state_105 = IDLE;
-const struct Chord chord_105 PROGMEM = {H_kS, asetniop_arr, &state_105, NULL, KC_SLCK, 0, single_dance};
+const struct Chord chord_105 PROGMEM = {H_ELS, ASETNIOP, &state_105, NULL, KC_MUTE, 0, single_dance};
 uint8_t state_106 = IDLE;
-const struct Chord chord_106 PROGMEM = {H_kE, asetniop_arr, &state_106, NULL, KC_PAUS, 0, single_dance};
+const struct Chord chord_106 PROGMEM = {H_ELD, ASETNIOP, &state_106, NULL, KC_WH_D, 0, single_dance};
 uint8_t state_107 = IDLE;
-const struct Chord chord_107 PROGMEM = {H_kT, asetniop_arr, &state_107, NULL, KC_NLCK, 0, single_dance};
+const struct Chord chord_107 PROGMEM = {H_kA, asetniop_123, &state_107, NULL, KC_1, 0, single_dance};
 uint8_t state_108 = IDLE;
-const struct Chord chord_108 PROGMEM = {H_kA, ball_scroll, &state_108, NULL, KC_A, 0, single_dance};
+const struct Chord chord_108 PROGMEM = {H_kS, asetniop_123, &state_108, NULL, KC_2, 0, single_dance};
 uint8_t state_109 = IDLE;
-const struct Chord chord_109 PROGMEM = {H_kA, ball_volume, &state_109, NULL, KC_A, 0, single_dance};
+const struct Chord chord_109 PROGMEM = {H_kE, asetniop_123, &state_109, NULL, KC_3, 0, single_dance};
 uint8_t state_110 = IDLE;
-const struct Chord chord_110 PROGMEM = {H_kS, asetniop_mods, &state_110, NULL, KC_LALT, 0, single_dance};
+const struct Chord chord_110 PROGMEM = {H_kT, asetniop_123, &state_110, NULL, KC_4, 0, single_dance};
 uint8_t state_111 = IDLE;
-const struct Chord chord_111 PROGMEM = {H_kE, asetniop_mods, &state_111, NULL, KC_LCTL, 0, single_dance};
+const struct Chord chord_111 PROGMEM = {H_kN, asetniop_123, &state_111, NULL, KC_7, 0, single_dance};
 uint8_t state_112 = IDLE;
-const struct Chord chord_112 PROGMEM = {H_kT, asetniop_mods, &state_112, NULL, KC_LSFT, 0, single_dance};
+const struct Chord chord_112 PROGMEM = {H_kI, asetniop_123, &state_112, NULL, KC_8, 0, single_dance};
 uint8_t state_113 = IDLE;
-const struct Chord chord_113 PROGMEM = {H_kA, asetniop_num, &state_113, NULL, KC_P1, 0, single_dance};
+const struct Chord chord_113 PROGMEM = {H_kO, asetniop_123, &state_113, NULL, KC_9, 0, single_dance};
 uint8_t state_114 = IDLE;
-const struct Chord chord_114 PROGMEM = {H_kS, asetniop_num, &state_114, NULL, KC_P2, 0, single_dance};
+const struct Chord chord_114 PROGMEM = {H_kP, asetniop_123, &state_114, NULL, KC_0, 0, single_dance};
 uint8_t state_115 = IDLE;
-const struct Chord chord_115 PROGMEM = {H_kE, asetniop_num, &state_115, NULL, KC_P3, 0, single_dance};
+const struct Chord chord_115 PROGMEM = {H_kE + H_kT, asetniop_123, &state_115, NULL, KC_5, 0, single_dance};
 uint8_t state_116 = IDLE;
-const struct Chord chord_116 PROGMEM = {H_kT, asetniop_num, &state_116, NULL, KC_P4, 0, single_dance};
+const struct Chord chord_116 PROGMEM = {H_kN + H_kI, asetniop_123, &state_116, NULL, KC_6, 0, single_dance};
 uint8_t state_117 = IDLE;
-const struct Chord chord_117 PROGMEM = {H_kN, asetniop_num, &state_117, NULL, KC_P7, 0, single_dance};
+const struct Chord chord_117 PROGMEM = {H_kS + H_kE, asetniop_123, &state_117, NULL, KC_GRV, 0, single_dance};
 uint8_t state_118 = IDLE;
-const struct Chord chord_118 PROGMEM = {H_kI, asetniop_num, &state_118, NULL, KC_P8, 0, single_dance};
+const struct Chord chord_118 PROGMEM = {H_kI + H_kO, asetniop_123, &state_118, NULL, KC_BSLS, 0, single_dance};
 uint8_t state_119 = IDLE;
-const struct Chord chord_119 PROGMEM = {H_kO, asetniop_num, &state_119, NULL, KC_P9, 0, single_dance};
+const struct Chord chord_119 PROGMEM = {H_FL, asetniop_123, &state_119, NULL, KC_5, 0, single_dance};
 uint8_t state_120 = IDLE;
-const struct Chord chord_120 PROGMEM = {H_kP, asetniop_num, &state_120, NULL, KC_P0, 0, single_dance};
+const struct Chord chord_120 PROGMEM = {H_FR, asetniop_123, &state_120, NULL, KC_6, 0, single_dance};
 uint8_t state_121 = IDLE;
-const struct Chord chord_121 PROGMEM = {H_kE + H_kT, asetniop_num, &state_121, NULL, KC_P5, 0, single_dance};
+const struct Chord chord_121 PROGMEM = {H_kA, asetniop_fn, &state_121, NULL, KC_F1, 0, single_dance};
 uint8_t state_122 = IDLE;
-const struct Chord chord_122 PROGMEM = {H_kN + H_kI, asetniop_num, &state_122, NULL, KC_P6, 0, single_dance};
+const struct Chord chord_122 PROGMEM = {H_kS, asetniop_fn, &state_122, NULL, KC_F2, 0, single_dance};
 uint8_t state_123 = IDLE;
-const struct Chord chord_123 PROGMEM = {H_kS + H_kE, asetniop_num, &state_123, NULL, KC_PSLS, 0, single_dance};
+const struct Chord chord_123 PROGMEM = {H_kE, asetniop_fn, &state_123, NULL, KC_F3, 0, single_dance};
 uint8_t state_124 = IDLE;
-const struct Chord chord_124 PROGMEM = {H_kA + H_kT, asetniop_num, &state_124, NULL, KC_PMNS, 0, single_dance};
+const struct Chord chord_124 PROGMEM = {H_kT, asetniop_fn, &state_124, NULL, KC_F4, 0, single_dance};
 uint8_t state_125 = IDLE;
-const struct Chord chord_125 PROGMEM = {H_kI + H_kO, asetniop_num, &state_125, NULL, KC_PPLS, 0, single_dance};
+const struct Chord chord_125 PROGMEM = {H_kN, asetniop_fn, &state_125, NULL, KC_F7, 0, single_dance};
 uint8_t state_126 = IDLE;
-const struct Chord chord_126 PROGMEM = {H_kN + H_kP, asetniop_num, &state_126, NULL, KC_PAST, 0, single_dance};
+const struct Chord chord_126 PROGMEM = {H_kI, asetniop_fn, &state_126, NULL, KC_F8, 0, single_dance};
 uint8_t state_127 = IDLE;
-const struct Chord chord_127 PROGMEM = {H_kA + H_kS + H_kE + H_kT, asetniop_num, &state_127, NULL, KC_PDOT, 0, single_dance};
+const struct Chord chord_127 PROGMEM = {H_kO, asetniop_fn, &state_127, NULL, KC_F9, 0, single_dance};
 uint8_t state_128 = IDLE;
-const struct Chord chord_128 PROGMEM = {H_kN + H_kI + H_kO + H_kP, asetniop_num, &state_128, NULL, KC_PENT, 0, single_dance};
+const struct Chord chord_128 PROGMEM = {H_kP, asetniop_fn, &state_128, NULL, KC_F10, 0, single_dance};
+uint8_t state_129 = IDLE;
+const struct Chord chord_129 PROGMEM = {H_kE + H_kT, asetniop_fn, &state_129, NULL, KC_F5, 0, single_dance};
+uint8_t state_130 = IDLE;
+const struct Chord chord_130 PROGMEM = {H_kN + H_kI, asetniop_fn, &state_130, NULL, KC_F6, 0, single_dance};
+uint8_t state_131 = IDLE;
+const struct Chord chord_131 PROGMEM = {H_kS + H_kE, asetniop_fn, &state_131, NULL, KC_F11, 0, single_dance};
+uint8_t state_132 = IDLE;
+const struct Chord chord_132 PROGMEM = {H_kI + H_kO, asetniop_fn, &state_132, NULL, KC_F12, 0, single_dance};
+uint8_t state_133 = IDLE;
+const struct Chord chord_133 PROGMEM = {H_FL, asetniop_fn, &state_133, NULL, KC_F5, 0, single_dance};
+uint8_t state_134 = IDLE;
+const struct Chord chord_134 PROGMEM = {H_FR, asetniop_fn, &state_134, NULL, KC_F6, 0, single_dance};
+uint8_t state_135 = IDLE;
+const struct Chord chord_135 PROGMEM = {H_kN, asetniop_arr, &state_135, NULL, KC_LEFT, 0, single_dance};
+uint8_t state_136 = IDLE;
+const struct Chord chord_136 PROGMEM = {H_kI, asetniop_arr, &state_136, NULL, KC_DOWN, 0, single_dance};
+uint8_t state_137 = IDLE;
+const struct Chord chord_137 PROGMEM = {H_kO, asetniop_arr, &state_137, NULL, KC_UP, 0, single_dance};
+uint8_t state_138 = IDLE;
+const struct Chord chord_138 PROGMEM = {H_kP, asetniop_arr, &state_138, NULL, KC_RIGHT, 0, single_dance};
+uint8_t state_139 = IDLE;
+const struct Chord chord_139 PROGMEM = {H_kN + H_kI, asetniop_arr, &state_139, NULL, KC_PGUP, 0, single_dance};
+uint8_t state_140 = IDLE;
+const struct Chord chord_140 PROGMEM = {H_kI + H_kO, asetniop_arr, &state_140, NULL, KC_HOME, 0, single_dance};
+uint8_t state_141 = IDLE;
+const struct Chord chord_141 PROGMEM = {H_kO + H_kP, asetniop_arr, &state_141, NULL, KC_PGDN, 0, single_dance};
+uint8_t state_142 = IDLE;
+const struct Chord chord_142 PROGMEM = {H_kN + H_kP, asetniop_arr, &state_142, NULL, KC_END, 0, single_dance};
+uint8_t state_143 = IDLE;
+const struct Chord chord_143 PROGMEM = {H_kA, asetniop_arr, &state_143, NULL, KC_PSCR, 0, single_dance};
+uint8_t state_144 = IDLE;
+const struct Chord chord_144 PROGMEM = {H_kS, asetniop_arr, &state_144, NULL, KC_LALT, 0, single_dance};
+uint8_t state_145 = IDLE;
+const struct Chord chord_145 PROGMEM = {H_kE, asetniop_arr, &state_145, NULL, KC_LCTL, 0, single_dance};
+uint8_t state_146 = IDLE;
+const struct Chord chord_146 PROGMEM = {H_kT, asetniop_arr, &state_146, NULL, KC_LSFT, 0, single_dance};
+uint8_t state_147 = IDLE;
+const struct Chord chord_147 PROGMEM = {H_kA, ball_scroll, &state_147, NULL, KC_A, 0, single_dance};
+uint8_t state_148 = IDLE;
+const struct Chord chord_148 PROGMEM = {H_kA, ball_volume, &state_148, NULL, KC_A, 0, single_dance};
+uint8_t state_149 = IDLE;
+const struct Chord chord_149 PROGMEM = {H_kS, asetniop_mods, &state_149, NULL, KC_LALT, 0, single_dance};
+uint8_t state_150 = IDLE;
+const struct Chord chord_150 PROGMEM = {H_kE, asetniop_mods, &state_150, NULL, KC_LCTL, 0, single_dance};
+uint8_t state_151 = IDLE;
+const struct Chord chord_151 PROGMEM = {H_kT, asetniop_mods, &state_151, NULL, KC_LSFT, 0, single_dance};
+uint8_t state_152 = IDLE;
+const struct Chord chord_152 PROGMEM = {H_FR, asetniop_mods, &state_152, NULL, KC_TAB, 0, single_dance};
+uint8_t state_153 = IDLE;
+const struct Chord chord_153 PROGMEM = {H_kN, asetniop_mods, &state_153, NULL, KC_PSCR, 0, single_dance};
+uint8_t state_154 = IDLE;
+const struct Chord chord_154 PROGMEM = {H_kI, asetniop_mods, &state_154, NULL, KC_SCRL, 0, single_dance};
+uint8_t state_155 = IDLE;
+const struct Chord chord_155 PROGMEM = {H_kO, asetniop_mods, &state_155, NULL, KC_PAUSE, 0, single_dance};
+uint8_t state_156 = IDLE;
+const struct Chord chord_156 PROGMEM = {H_kP, asetniop_mods, &state_156, NULL, KC_NUM, 0, single_dance};
+uint8_t state_157 = IDLE;
+const struct Chord chord_157 PROGMEM = {H_TMBR1, asetniop_mods, &state_157, NULL, KC_DEL, 0, single_dance};
+uint8_t state_158 = IDLE;
+const struct Chord chord_158 PROGMEM = {H_TMBR0, asetniop_mods, &state_158, NULL, KC_SPACE, 0, single_dance};
+uint8_t state_159 = IDLE;
+const struct Chord chord_159 PROGMEM = {H_BR1, asetniop_mods, &state_159, NULL, KC_INS, 0, single_dance};
+uint8_t state_160 = IDLE;
+const struct Chord chord_160 PROGMEM = {H_FL, asetniop_mods, &state_160, NULL, KC_LGUI, 0, single_dance};
+uint8_t state_161 = IDLE;
+const struct Chord chord_161 PROGMEM = {H_ELU, asetniop_mods, &state_161, NULL, KC_WH_U, 0, single_dance};
+uint8_t state_162 = IDLE;
+const struct Chord chord_162 PROGMEM = {H_ELD, asetniop_mods, &state_162, NULL, KC_WH_D, 0, single_dance};
+uint8_t state_163 = IDLE;
+const struct Chord chord_163 PROGMEM = {H_kA, asetniop_num, &state_163, NULL, KC_P1, 0, single_dance};
+uint8_t state_164 = IDLE;
+const struct Chord chord_164 PROGMEM = {H_kS, asetniop_num, &state_164, NULL, KC_P2, 0, single_dance};
+uint8_t state_165 = IDLE;
+const struct Chord chord_165 PROGMEM = {H_kE, asetniop_num, &state_165, NULL, KC_P3, 0, single_dance};
+uint8_t state_166 = IDLE;
+const struct Chord chord_166 PROGMEM = {H_kT, asetniop_num, &state_166, NULL, KC_P4, 0, single_dance};
+uint8_t state_167 = IDLE;
+const struct Chord chord_167 PROGMEM = {H_kN, asetniop_num, &state_167, NULL, KC_P7, 0, single_dance};
+uint8_t state_168 = IDLE;
+const struct Chord chord_168 PROGMEM = {H_kI, asetniop_num, &state_168, NULL, KC_P8, 0, single_dance};
+uint8_t state_169 = IDLE;
+const struct Chord chord_169 PROGMEM = {H_kO, asetniop_num, &state_169, NULL, KC_P9, 0, single_dance};
+uint8_t state_170 = IDLE;
+const struct Chord chord_170 PROGMEM = {H_kP, asetniop_num, &state_170, NULL, KC_P0, 0, single_dance};
+uint8_t state_171 = IDLE;
+const struct Chord chord_171 PROGMEM = {H_kE + H_kT, asetniop_num, &state_171, NULL, KC_P5, 0, single_dance};
+uint8_t state_172 = IDLE;
+const struct Chord chord_172 PROGMEM = {H_kN + H_kI, asetniop_num, &state_172, NULL, KC_P6, 0, single_dance};
+uint8_t state_173 = IDLE;
+const struct Chord chord_173 PROGMEM = {H_FL, asetniop_num, &state_173, NULL, KC_P5, 0, single_dance};
+uint8_t state_174 = IDLE;
+const struct Chord chord_174 PROGMEM = {H_FR, asetniop_num, &state_174, NULL, KC_P6, 0, single_dance};
+uint8_t state_175 = IDLE;
+const struct Chord chord_175 PROGMEM = {H_kS + H_kE, asetniop_num, &state_175, NULL, KC_PSLS, 0, single_dance};
+uint8_t state_176 = IDLE;
+const struct Chord chord_176 PROGMEM = {H_kA + H_kT, asetniop_num, &state_176, NULL, KC_PMNS, 0, single_dance};
+uint8_t state_177 = IDLE;
+const struct Chord chord_177 PROGMEM = {H_kI + H_kO, asetniop_num, &state_177, NULL, KC_PPLS, 0, single_dance};
+uint8_t state_178 = IDLE;
+const struct Chord chord_178 PROGMEM = {H_kN + H_kP, asetniop_num, &state_178, NULL, KC_PAST, 0, single_dance};
+uint8_t state_179 = IDLE;
+const struct Chord chord_179 PROGMEM = {H_kA + H_kS + H_kE + H_kT, asetniop_num, &state_179, NULL, KC_PDOT, 0, single_dance};
+uint8_t state_180 = IDLE;
+const struct Chord chord_180 PROGMEM = {H_kN + H_kI + H_kO + H_kP, asetniop_num, &state_180, NULL, KC_PENT, 0, single_dance};
+uint8_t state_181 = IDLE;
+const struct Chord chord_181 PROGMEM = {H_ELU, right_ir, &state_181, NULL, KC_VOLU, 0, single_dance};
+uint8_t state_182 = IDLE;
+const struct Chord chord_182 PROGMEM = {H_ELD, right_ir, &state_182, NULL, KC_VOLD, 0, single_dance};
+uint8_t state_183 = IDLE;
+const struct Chord chord_183 PROGMEM = {H_ELS, right_ir, &state_183, NULL, KC_MUTE, 0, single_dance};
 
 const struct Chord* const list_of_chords[] PROGMEM = {
-    &chord_0, &chord_1, &chord_2, &chord_3, &chord_4, &chord_5, &chord_6, &chord_7, &chord_8, &chord_9, &chord_10, &chord_11, &chord_12, &chord_13, &chord_14, &chord_15, &chord_16, &chord_17, &chord_18, &chord_19, &chord_20, &chord_21, &chord_22, &chord_23, &chord_24, &chord_25, &chord_26, &chord_27, &chord_28, &chord_29, &chord_30, &chord_31, &chord_32, &chord_33, &chord_34, &chord_35, &chord_36, &chord_37, &chord_38, &chord_39, &chord_40, &chord_41, &chord_42, &chord_43, &chord_44, &chord_45, &chord_46, &chord_47, &chord_48, &chord_49, &chord_50, &chord_51, &chord_52, &chord_53, &chord_54, &chord_55, &chord_56, &chord_57, &chord_58, &chord_59, &chord_60, &chord_61, &chord_62, &chord_63, &chord_64, &chord_65, &chord_66, &chord_67, &chord_68, &chord_69, &chord_70, &chord_71, &chord_72, &chord_73, &chord_74, &chord_75, &chord_76, &chord_77, &chord_78, &chord_79, &chord_80, &chord_81, &chord_82, &chord_83, &chord_84, &chord_85, &chord_86, &chord_87, &chord_88, &chord_89, &chord_90, &chord_91, &chord_92, &chord_93, &chord_94, &chord_95, &chord_96, &chord_97, &chord_98, &chord_99, &chord_100, &chord_101, &chord_102, &chord_103, &chord_104, &chord_105, &chord_106, &chord_107, &chord_108, &chord_109, &chord_110, &chord_111, &chord_112, &chord_113, &chord_114, &chord_115, &chord_116, &chord_117, &chord_118, &chord_119, &chord_120, &chord_121, &chord_122, &chord_123, &chord_124, &chord_125, &chord_126, &chord_127, &chord_128
+    &chord_0, &chord_1, &chord_2, &chord_3, &chord_4, &chord_5, &chord_6, &chord_7, &chord_8, &chord_9, &chord_10, &chord_11, &chord_12, &chord_13, &chord_14, &chord_15, &chord_16, &chord_17, &chord_18, &chord_19, &chord_20, &chord_21, &chord_22, &chord_23, &chord_24, &chord_25, &chord_26, &chord_27, &chord_28, &chord_29, &chord_30, &chord_31, &chord_32, &chord_33, &chord_34, &chord_35, &chord_36, &chord_37, &chord_38, &chord_39, &chord_40, &chord_41, &chord_42, &chord_43, &chord_44, &chord_45, &chord_46, &chord_47, &chord_48, &chord_49, &chord_50, &chord_51, &chord_52, &chord_53, &chord_54, &chord_55, &chord_56, &chord_57, &chord_58, &chord_59, &chord_60, &chord_61, &chord_62, &chord_63, &chord_64, &chord_65, &chord_66, &chord_67, &chord_68, &chord_69, &chord_70, &chord_71, &chord_72, &chord_73, &chord_74, &chord_75, &chord_76, &chord_77, &chord_78, &chord_79, &chord_80, &chord_81, &chord_82, &chord_83, &chord_84, &chord_85, &chord_86, &chord_87, &chord_88, &chord_89, &chord_90, &chord_91, &chord_92, &chord_93, &chord_94, &chord_95, &chord_96, &chord_97, &chord_98, &chord_99, &chord_100, &chord_101, &chord_102, &chord_103, &chord_104, &chord_105, &chord_106, &chord_107, &chord_108, &chord_109, &chord_110, &chord_111, &chord_112, &chord_113, &chord_114, &chord_115, &chord_116, &chord_117, &chord_118, &chord_119, &chord_120, &chord_121, &chord_122, &chord_123, &chord_124, &chord_125, &chord_126, &chord_127, &chord_128, &chord_129, &chord_130, &chord_131, &chord_132, &chord_133, &chord_134, &chord_135, &chord_136, &chord_137, &chord_138, &chord_139, &chord_140, &chord_141, &chord_142, &chord_143, &chord_144, &chord_145, &chord_146, &chord_147, &chord_148, &chord_149, &chord_150, &chord_151, &chord_152, &chord_153, &chord_154, &chord_155, &chord_156, &chord_157, &chord_158, &chord_159, &chord_160, &chord_161, &chord_162, &chord_163, &chord_164, &chord_165, &chord_166, &chord_167, &chord_168, &chord_169, &chord_170, &chord_171, &chord_172, &chord_173, &chord_174, &chord_175, &chord_176, &chord_177, &chord_178, &chord_179, &chord_180, &chord_181, &chord_182, &chord_183
 };
 
 void ls_sshot(void) { SEND_STRING(SS_LSFT(SS_LCMD("s"))); }
-void ls_mute(void) { tap_key(KC_MUTE); }
-void ls_ppause(void) { tap_key(KC_MPLY); }
 void ls_winlock(void) { SEND_STRING(SS_LCMD("l")); }
-void ls_fbplay(void) { SEND_STRING(SS_LSFT(SS_LALT("P"))); }
 
 const uint16_t leader_triggers[][LEADER_MAX_LENGTH] PROGMEM = {
     {KC_S, 0, 0, 0, 0},
-    {KC_M, 0, 0, 0, 0},
-    {KC_P, 0, 0, 0, 0},
     {KC_L, 0, 0, 0, 0},
-    {KC_N, 0, 0, 0, 0},
 };
 
 void (*leader_functions[]) (void) = {
-    &ls_sshot, &ls_mute, &ls_ppause, &ls_winlock, &ls_fbplay
+    &ls_sshot, &ls_winlock
 };
 
-#define NUMBER_OF_CHORDS 129
-#define NUMBER_OF_LEADER_COMBOS 5
+#define NUMBER_OF_CHORDS 184
+#define NUMBER_OF_LEADER_COMBOS 2
 
 bool are_hashed_keycodes_in_sound(HASH_TYPE keycodes_hash, HASH_TYPE sound) {
     return (keycodes_hash & sound) == keycodes_hash;

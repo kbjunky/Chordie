@@ -1,12 +1,14 @@
 {
-  "keys": [                        
-                        "ELU",                     "ERU",
-                        "ELS",                     "ERS",
-                        "ELD",                     "ERD",        
+  "keys": [               
+                        "IRL",                     "IRR",        
+                        "ELU",                                       
+                        "ELS",                  
+                        "ELD",                             
   "kA", "kS",   "kE",   "kT",                      "kN",  "kI",   "kO", "kP",
-                        "BL1",                     "BR1",
-                        "TMBL0",                   "TMBR0",
-                        "TMBL1",                   "TMBR1"                                           
+                        "FL",                   "FR",
+                            "BL1",              "BR1",
+                            "TMBL0",          "TMBR0",
+                            "TMBL1",          "TMBR1"
   ],
   "parameters": {
     "layout_function_name": "LAYOUT",
@@ -32,7 +34,6 @@
       "name": "asetniop",
       "chords": [               
         ["kA"], ["kS"], ["kE"], ["kT"], ["kN"], ["kI"], ["kO"], ["kP"],                       
-        ["kA", "kS", "kE", "kT"], ["kN", "kI", "kO", "kP"],
         ["kA", "kT", "kN", "kP"],
         ["kS", "kE", "kI", "kO"],
         ["kA", "kS"], ["kS", "kE"], ["kE", "kT"], ["kT", "kN"], ["kN", "kI"], ["kI", "kO"], ["kO", "kP"],
@@ -45,17 +46,27 @@
         ["TMBR0"], ["TMBR1"],
         ["TMBL0", "TMBR0"],
         ["TMBL1", "TMBR1"],
-        ["kT", "kN", "kI"], ["kT", "kI", "kO"], ["kT", "kN", "kO"], ["kT", "kN", "kI", "kP"],
-        ["kE", "kN", "kI"], ["kE", "kI", "kO"], ["kE", "kN", "kO"], ["kE", "kN", "kI", "kP"],
-        ["TMBL0", "kT"], ["TMBL1", "kT"],
+        ["kT", "kN", "kI"], ["kT", "kI", "kO"], ["kT", "kN", "kO"], ["kT", "kI", "kP"],
+        ["kE", "kN", "kI"], ["kE", "kI", "kO"], ["kE", "kN", "kO"], ["kE", "kI", "kP"],
+        ["TMBL0", "kA"], ["TMBL1", "kT"],
         ["kA", "kS", "kE"], ["kS", "kE", "kT"], ["kN", "kI", "kO"], ["kI", "kO", "kP"],
         ["kI", "kE", "kT"],
         ["kE", "kT", "kN", "kI"], ["kA", "kS", "kO", "kP"],        
+        ["kA", "kS", "kE", "kT", "kN", "kI", "kO", "kP"],
+        ["kA", "FR"], ["kS", "FR"], ["kE", "FR"], ["kT", "FR"],
+        ["FL", "kN"], ["FL", "kI"],
+        ["TMBL0", "kA"], ["TMBL0", "kT"],
+        ["TMBR0", "kN"],
+        ["FL"], ["FR"],
+        ["FL", "FR"],
+        ["BL1", "kA"], ["BL1", "kS"], ["BL1", "kE"], ["BL1", "kT"], ["BL1", "kE", "kT"],
+        ["BR1", "kN", "kI"], ["BR1", "kN"], ["BR1", "kI"], ["BR1", "kO"], ["BR1", "kP"],
+        ["BL1", "FL"], ["BR1", "FR"],
+        ["BR1", "kE", "kP"], ["BR1", "kO", "kP"], ["BR1", "kE", "kI"], ["BR1", "kS", "kO"], ["BR1", "kA", "kP"], ["BR1", "kA", "kO"], ["BR1", "kS", "kP"], ["BR1", "kE", "kO"], ["BR1", "kA", "kS", "kE"], ["BR1", "kS", "kE", "kT"], ["BR1", "kN", "kI", "kO"],
+        ["TMBL1", "kA"], ["TMBL1", "kS"], ["TMBL1", "kE"],
         ["BR1"],
-        ["ELU"], ["ERU"],
-        ["ELS"], ["ERS"],
-        ["ELD"], ["ERD"],
-        ["kA", "kS", "kE", "kT", "kN", "kI", "kO", "kP"]
+        ["IRL"], ["IRR"],
+        ["ELU"], ["ELS"], ["ELD"]
       ]
     },
     {
@@ -67,7 +78,7 @@
     {
       "name": "mouse_buttons",
       "chords": [               
-        ["BL1"], ["TMBL0"], ["TMBL1"]           
+        ["BL1"], ["TMBL0"], ["TMBL1"]
       ]
     },
     {
@@ -83,7 +94,8 @@
       "chords": [               
        ["kA"], ["kS"], ["kE"], ["kT"], ["kN"], ["kI"], ["kO"], ["kP"],
        ["kE", "kT"], ["kN", "kI"],
-       ["kS", "kE"], ["kI", "kO"]            
+       ["kS", "kE"], ["kI", "kO"],
+       ["FL"], ["FR"]
       ]
     },
     {
@@ -91,23 +103,36 @@
       "chords": [               
         ["kA"], ["kS"], ["kE"], ["kT"], ["kN"], ["kI"], ["kO"], ["kP"],
         ["kE", "kT"], ["kN", "kI"],
-        ["kS", "kE"], ["kI", "kO"]          
+        ["kS", "kE"], ["kI", "kO"],
+        ["FL"], ["FR"]
       ]
     },
     {
       "name": "asetniop_mods",
       "chords": [               
-        ["kS"], ["kE"], ["kT"]          
+        ["kS"], ["kE"], ["kT"],
+        ["FR"],
+        ["kN"], ["kI"], ["kO"], ["kP"],
+        ["TMBR1"], ["TMBR0"], ["BR1"],
+        ["FL"],
+        ["ELU"], ["ELD"]
       ]
-    },    
+    },        
     {
       "name": "asetniop_num",
       "chords": [               
         ["kA"], ["kS"], ["kE"], ["kT"], ["kN"], ["kI"], ["kO"], ["kP"],
         ["kE", "kT"], ["kN", "kI"],
+        ["FL"], ["FR"],
         ["kS", "kE"], ["kA", "kT"],
         ["kI", "kO"],  ["kN", "kP"],
         ["kA", "kS", "kE", "kT"], ["kN", "kI", "kO", "kP"]
+      ]
+    },    
+    {
+      "name": "right_ir",
+      "chords": [               
+        ["ELU"], ["ELD"], ["ELS"]
       ]
     }
   ],
@@ -119,7 +144,7 @@
           "type": "chord_set",
           "set": "mouse_buttons",
           "keycodes": [                        
-          "PD(MOUSE_BTN3)", "PD(MOUSE_BTN1)", "PD(MOUSE_BTN2)"
+          "PD(MOUSE_BTN3)", "PD(MOUSE_BTN1)", "PD(MOUSE_BTN2)" 
         ]
         }           
       ]
@@ -131,8 +156,7 @@
           "type": "chord_set",
           "set": "asetniop",
           "keycodes": [                        
-            "KL(A, asetniop_mods)", "AS(S)", "AS(E)", "AS(T)", "AS(N)", "AS(I)", "AS(O)", "AS(P)",                                   
-            "TAB", "ENTER",
+            "KL(A, asetniop_mods)", "AS(S)", "AS(E)", "AS(T)", "AS(N)", "AS(I)", "AS(O)", "AS(P)",
             "CLEAR",
             "CAPS",
             "AS(W)", "AS(D)", "AS(R)", "AS(B)", "AS(H)", "AS(L)", "AS(;)",
@@ -143,19 +167,29 @@
             "AS([)", "AS(])",
             "AS(/)", 
             "KL(SPACE, asetniop_arr)", "KL(DEL, asetniop_123)",
-            "KL(ENTER, asetniop_num)",
-            "KL(ESC, asetniop_fn)",
+            "MO(asetniop_num)",
+            "MO(asetniop_fn)",
             "O(KC_LSFT)", "O(KC_LCTL)", "O(KC_LALT)", "O(KC_LGUI)",
             "O(KC_RSFT)", "O(KC_RCTL)", "O(KC_RALT)", "O(KC_RGUI)",
-            "MO(ball_scroll)", "MO(ball_volume)",
+            "KL(ESC, ball_scroll)", "MO(ball_volume)",
             "AS(GRV)", "AS(BSLS)", "AS(=)", "ESC",
             "INS",
             "LEAD", "LOCK",            
-            "ESC",
-            "VOLU", "WH_U",
-            "MUTE", "PD(MOUSE_BTN2)",
-            "VOLD", "WH_D",
-            "RESET"
+            "RESET",
+            "STR(sz)", "STR(cz)", "STR(ch)", "STR(rz)",
+            "STR(dz)", "STR(ze)",
+            "ESC", "TAB",
+            "ENTER",
+            "MK(LCMD, LCTL, LEFT)", "MK(LCMD, LCTL, RIGHT)",
+            "MK(LCMD, TAB)",
+            "!", "@", "#", "$", "%",
+            "^", "&", "*", "LPRN", "RPRN",
+            "%", "^",
+            "DOUBLE_QUOTE", ":", "<", ">", "?", "{", "}", "_", "~", "|", "+",
+            "MK(LALT, F4)", "WBAK", "MK(LCTL, W)",
+            "INS",
+            "MO(ball_scroll)", "MO(right_ir)",
+            "WH_U", "MUTE", "WH_D"
         ]
         }
       ]
@@ -167,9 +201,10 @@
           "type": "chord_set",
           "set": "asetniop_123",
           "keycodes": [                        
-          "AS(1)", "AS(2)", "AS(3)", "AS(4)", "AS(7)", "AS(8)", "AS(9)", "AS(0)",
-          "AS(5)", "AS(6)",
-          "AS(GRV)", "AS(BSLS)"
+          "1", "2", "3", "4", "7", "8", "9", "0",
+          "5", "6",
+          "GRV", "BSLS",
+          "5", "6"
         ]
         }           
       ]
@@ -181,9 +216,10 @@
           "type": "chord_set",
           "set": "asetniop_fn",
           "keycodes": [                        
-            "AS(F1)", "AS(F2)", "AS(F3)", "AS(F4)", "AS(F7)", "AS(F8)", "AS(F9)", "AS(F10)",
-            "AS(F5)", "AS(F6)",
-            "AS(F11)", "AS(F12)"                 
+            "F1", "F2", "F3", "F4", "F7", "F8", "F9", "F10",
+            "F5", "F6",
+            "F11", "F12",
+            "F5", "F6"
         ]
         }           
       ]
@@ -197,7 +233,7 @@
           "keycodes": [                        
             "LEFT", "DOWN", "UP", "RIGHT",            
             "PGUP", "HOME", "PGDN", "END",
-            "PSCR", "SLCK", "PAUS", "NLCK"
+            "PSCR", "KC_LALT", "KC_LCTL", "KC_LSFT"
         ]
         }              
       ]
@@ -235,7 +271,12 @@
           "type": "chord_set",
           "set": "asetniop_mods",
           "keycodes": [                        
-            "KC_LALT", "KC_LCTL", "KC_LSFT"   
+            "KC_LALT", "KC_LCTL", "KC_LSFT",
+            "TAB",  
+            "PSCR", "SCRL", "PAUSE", "NUM",
+            "DEL", "SPACE", "INS",
+            "KC_LGUI",
+            "WH_U", "WH_D"
           ]
         }    
       ]
@@ -249,41 +290,40 @@
           "keycodes": [                        
             "P1", "P2", "P3", "P4", "P7", "P8", "P9", "P0",
             "P5", "P6",
+            "P5", "P6",
             "PSLS", "PMNS",
             "PPLS", "PAST",
             "PDOT", "PENT"
           ]
+        } 
+      ]
+    },
+    {
+      "name": "right_ir",
+      "chords": [
+        {
+          "type": "chord_set",
+          "set": "right_ir",
+          "keycodes": [
+          "VOLU", "VOLD", "MUTE"
+          ]
         }               
               
       ]
-    }
-  ],
+    }     
+],
   "leader_sequences": [ 
       {
         "name": "ls_sshot",
         "function": "void ls_sshot(void) { SEND_STRING(SS_LSFT(SS_LCMD(\"s\"))); }",
         "sequence": ["KC_S"]
-      },
-      {
-        "name": "ls_mute",
-        "function": "void ls_mute(void) { tap_key(KC_MUTE); }",
-        "sequence": ["KC_M"]
-      },
-      {
-        "name": "ls_ppause",
-        "function": "void ls_ppause(void) { tap_key(KC_MPLY); }",
-        "sequence": ["KC_P"]
-      },
+      },      
       {
         "name": "ls_winlock",
         "function": "void ls_winlock(void) { SEND_STRING(SS_LCMD(\"l\")); }",
         "sequence": ["KC_L"]
-      },
-      {
-        "name": "ls_fbplay",
-        "function": "void ls_fbplay(void) { SEND_STRING(SS_LSFT(SS_LALT(\"P\"))); }",
-        "sequence": ["KC_N"]
-      }     
+      }
+       
   ],
   "extra_code": "",
   "extra_dependencies": []

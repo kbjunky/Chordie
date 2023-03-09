@@ -3,176 +3,162 @@
 
 ![](/img/chordie1.png)
 
-***"It" inspired picture courtesy of [Sean Yin](https://www.coroflot.com/sean_yin)***
+***Chordie "It" inspired picture courtesy of [Sean Yin](https://www.coroflot.com/sean_yin)***
 
-![](/img/chordie2.jpg)
+![](/img/mxchocchordie.png)
 
-This is my attempt at a chording keyboard. I got inspired by [gBoards' Ginny keyboard](https://www.gboards.ca/product/ginni) but felt like there's some room for improvements. Especially uncomfortable was using mouse with it. Thus I have decided to attach a trackball. Now mouse buttons are part of the keyboard and can also be used in chords. Trackball can be kept very close to the keyboard eliminating the need for moving your hand like with normal mouse. I have also added rotary encoders to make some of the operations easily accessible. This project wouldn't have been possible without an awesome chording engine by [DennyTom](https://github.com/DennyTom/qmk_firmware/tree/feature/buttery_engine_v2/users/dennytom/chording_engine). I have extended it a bit to support pointing devices(mouse buttons handling) as well as performing some operations with the ball like scrolling, changing volume etc. Plus some bug fixes(broken leader key handling). I also wanted to make the build process as easy as possible. All parts just clip in and only 2 screws are needed to secure the trackball sensor. Everything is hand wired and there's no need for PCB. No special soldering skills are required either (except for making the ADNS9800 sensor if you opt to make one on your own, I've also included pre-built version in BOM which should work as well). **Trackball is optional though**. This keyboard is using [ASETNIOP](http://asetniop.com/).
+### Chordie is a chording keyboard heavily inspired by [gBoards' Ginny keyboard](https://www.gboards.ca/product/ginni) running on awesome chording engine by [DennyTom](https://github.com/DennyTom/qmk_firmware/tree/feature/buttery_engine_v2/users/dennytom/chording_engine). It supports all 104 keys found on normal keyboards and much more in large part thanks to [ASETNIOP](http://asetniop.com/) layout. For a complete experience it's also equipped with trackball. Except for the mouse sensor module whole assembly can be handwired in about 6 hours.
 
-## **BOM - base**
+## **BOM**
 |Item                                       |Count  |Example|
 |:---                                       |:---:  |:---:|
 |MCP23017 I2C Expander Breakout Board       |2      |[Link](https://www.aliexpress.com/item/1005002491319987.html?spm=a2g0o.productlist.0.0.69692ef16bL9AS&algo_pvid=409629d1-6323-42fb-83ee-a506b3168261&algo_exp_id=409629d1-6323-42fb-83ee-a506b3168261-25&pdp_ext_f=%7B%22sku_id%22%3A%2212000020851672976%22%7D)|
 |Pro Micro 5V 16MHz                         |1      |[Link](https://www.aliexpress.com/item/32768308647.html?spm=a2g0o.productlist.0.0.2607f202QTTq67&algo_pvid=7ec29e4c-daf6-41db-8152-19ac2f65dfd9&algo_exp_id=7ec29e4c-daf6-41db-8152-19ac2f65dfd9-0)|
-|TRRS Socket PJ-320A                        |4      |[Link](https://www.aliexpress.com/item/4000661212458.html?spm=a2g0o.productlist.0.0.786215bcMDWN6j&algo_pvid=48175f89-cc7c-4d82-9240-efce3152adfa&algo_exp_id=48175f89-cc7c-4d82-9240-efce3152adfa-2)|
-|TRRS Cable Male to Male 0.5m               |2      |[Link](https://www.aliexpress.com/item/32905903526.html?spm=a2g0o.productlist.0.0.4dc47529QkykEs&algo_pvid=9cf4583a-296e-42ce-8e4a-b7ea884c7d69&algo_exp_id=9cf4583a-296e-42ce-8e4a-b7ea884c7d69-0)|
-|4.7k Ohm resistor through hole             |2      |[Link](https://www.aliexpress.com/item/32952657927.html?spm=a2g0o.productlist.0.0.55367bd26OIocu&algo_pvid=eb21df2b-1bb7-4781-a8fa-866f7e1554e0&algo_exp_id=eb21df2b-1bb7-4781-a8fa-866f7e1554e0-0)|
-|Enameled copper jumper wire 0.1mm          |1      |[Link](https://www.aliexpress.com/item/32848033421.html?spm=a2g0o.productlist.0.0.222d322f9kKtko&algo_pvid=4df65977-a071-4e66-b8d2-4cdc380b177d&algo_exp_id=4df65977-a071-4e66-b8d2-4cdc380b177d-0)|
-|5mm kepton tape                            |1      |[Link](https://www.aliexpress.com/item/1005001870368903.html?spm=a2g0o.productlist.0.0.56c32964so3t00&algo_pvid=b4641df1-4258-436e-ae0a-dd49df904cfe&algo_exp_id=b4641df1-4258-436e-ae0a-dd49df904cfe-0)|
-|12mm rotary encoder with switch            |0-2    |[Link](https://sg.rs-online.com/web/p/mechanical-rotary-encoders/7377742/)|
-|15x16 knob for 12mm encoder                |0-2    |[Link](https://www.aliexpress.com/item/1005001323668563.html?spm=a2g0o.detail.1000014.23.248e794eVvCEnx&gps-id=pcDetailBottomMoreOtherSeller&scm=1007.14976.204930.0&scm_id=1007.14976.204930.0&scm-url=1007.14976.204930.0&pvid=a1382086-ef33-42ef-a9ab-94a2c085269f&_t=gps-id:pcDetailBottomMoreOtherSeller,scm-url:1007.14976.204930.0,pvid:a1382086-ef33-42ef-a9ab-94a2c085269f,tpp_buckets:668%230%23131923%2371_668%23888%233325%231_4976%230%23204930%239_4976%232711%237538%23796_4976%233104%239653%236_4976%234052%2321623%2388_4976%233141%239887%234_668%232846%238109%231935_668%232717%237564%23648_668%231000022185%231000066059%230_668%233422%2315392%23340_4452%230%23189847%230_4452%233474%2315675%23228_4452%234862%2322449%23630_4452%233098%239599%23666_4452%233564%2316062%23426)|
-|EVQ-WGD001 encoder with switch             |0-2    |[Link](https://www.aliexpress.com/item/4001293888953.html?spm=a2g0o.productlist.0.0.118759fcSeFGBC&algo_pvid=847610a8-18a5-4fa9-a57b-980ad6205089&algo_exp_id=847610a8-18a5-4fa9-a57b-980ad6205089-0)|
-|Kailh Choc V1 25g switch                   |14     |[Link](https://www.aliexpress.com/item/4000907409650.html?spm=a2g0o.store_pc_groupList.8148356.11.606939a66Tvk6L)|
-|Choc keycaps 1u                            |8      |[Link](https://www.aliexpress.com/item/32979973961.html?spm=a2g0o.store_pc_groupList.8148356.21.1b9d36a4Coe1f0)|
-|Choc keycaps 1.5u                          |6      |[Link](https://www.aliexpress.com/item/4000135705283.html?spm=a2g0o.store_pc_groupList.8148356.31.5b1136a4d8gvZK)|
-|6x2 antislip pads                          |4|[Link](https://www.aliexpress.com/item/1005001834060269.html?spm=a2g0o.productlist.0.0.1b4de9abYDw7VQ&algo_pvid=7e52f7bd-74d2-497d-89a9-5126675db393&algo_exp_id=7e52f7bd-74d2-497d-89a9-5126675db393-11)|
+|TRRS Socket PJ-320A                        |2      |[Link](https://www.aliexpress.com/item/4000661212458.html?spm=a2g0o.productlist.0.0.786215bcMDWN6j&algo_pvid=48175f89-cc7c-4d82-9240-efce3152adfa&algo_exp_id=48175f89-cc7c-4d82-9240-efce3152adfa-2)|
+|TRRS Cable Male to Male 0.5m               |1      |[Link](https://www.aliexpress.com/item/32905903526.html?spm=a2g0o.productlist.0.0.4dc47529QkykEs&algo_pvid=9cf4583a-296e-42ce-8e4a-b7ea884c7d69&algo_exp_id=9cf4583a-296e-42ce-8e4a-b7ea884c7d69-0)|
+|Enameled copper wire 0.2mm 10m             |1      |[Link](https://www.aliexpress.com/item/1005003799096513.html?spm=a2g0o.order_list.order_list_main.26.21ef18020rLkLI)|
+|5mm kapton tape                            |1      |[Link](https://www.aliexpress.com/item/4000808659339.html?spm=a2g0o.order_list.order_list_main.86.21ef18020rLkLI)|
+|EVQ-WGD001 encoder with switch             |1      |[Link](https://www.aliexpress.com/item/4001293888953.html?spm=a2g0o.productlist.0.0.118759fcSeFGBC&algo_pvid=847610a8-18a5-4fa9-a57b-980ad6205089&algo_exp_id=847610a8-18a5-4fa9-a57b-980ad6205089-0)|
+|Kailh Choc V1 25g or 20g MX switch         |16     |[Link](https://www.aliexpress.com/item/4000907409650.html?spm=a2g0o.store_pc_groupList.8148356.11.606939a66Tvk6L)|
+|Choc/MX keycaps 1u                         |10     |[Link](https://www.aliexpress.com/item/32979973961.html?spm=a2g0o.store_pc_groupList.8148356.21.1b9d36a4Coe1f0)|
+|Choc/MX keycaps 1.5u                       |6      |[Link](https://www.aliexpress.com/item/4000135705283.html?spm=a2g0o.store_pc_groupList.8148356.31.5b1136a4d8gvZK)|
+|8mmx1mm antislip pads                      |14     |[Link](https://www.aliexpress.com/item/32767105328.html?spm=a2g0o.order_list.order_list_main.5.4f631802SBcIju)|
+|ZrO2 bearing ball                          |3      |[Link](https://www.aliexpress.com/item/4000140957504.html?spm=a2g0o.order_list.order_list_main.66.21ef18020rLkLI)|
+|M570/Ergo 34mm trackball ball              |1      |[Link](https://www.aliexpress.com/item/1005003007477853.html?spm=a2g0o.productlist.0.0.5c2375b6zAYly4&algo_pvid=002d0afb-2191-423d-83ef-9072c89420e0&algo_exp_id=002d0afb-2191-423d-83ef-9072c89420e0-3)|
+|M2x3mm heat insert (optional)              |15     |[Link](https://www.aliexpress.com/item/33021847966.html?spm=a2g0o.order_detail.order_detail_item.9.62d2f19cZBgXLP)
+|M2x15mm screw (trackball)                  |3      |[Link](https://www.aliexpress.com/item/32973784147.html?spm=a2g0o.order_detail.order_detail_item.3.28ecf19cnWSpWO)
+|M2x4mm screw                               |12     |[Link](https://www.aliexpress.com/item/32973784147.html?spm=a2g0o.order_detail.order_detail_item.3.28ecf19cnWSpWO)
+|PMW3360 sensor module                      |1      |[Link](https://github.com/kbjunky/PMW3360)
+
+## **IrDA** ***(optional)***
+|Item                                       |Count  |Example|
+|:---                                       |:---:  |:---:|
+|TCRT5000 sensor                            |2      |[Link](https://www.aliexpress.com/item/32841920225.html?spm=a2g0o.productlist.main.3.79942950SPAjdz&algo_pvid=ed88d699-0338-4bcb-95a3-763932d98b16&algo_exp_id=ed88d699-0338-4bcb-95a3-763932d98b16-1&pdp_ext_f=%7B%22sku_id%22%3A%2265127182414%22%7D&pdp_npi=2%40dis%21SGD%211.3%211.18%21%21%21%21%21%40211be72e16751642359824286d0743%2165127182414%21sea&curPageLogUid=VzOE51f5ktnE)|
+|680/10k Ohm resistor                       |2 each |[Link](https://www.aliexpress.com/item/32847096736.html?spm=a2g0o.productlist.main.9.7f074331KtDEGu&algo_pvid=95030fc9-6a56-4629-8e69-df30ff729c8e&aem_p4p_detail=20230131032519392335935644940051139628&algo_exp_id=95030fc9-6a56-4629-8e69-df30ff729c8e-4&pdp_ext_f=%7B%22sku_id%22%3A%2265227930982%22%7D&pdp_npi=2%40dis%21SGD%210.7%210.49%21%21%21%21%21%40211bf04a16751643197514158d0764%2165227930982%21sea&curPageLogUid=GtNgOzT4snvI&ad_pvid=20230131032519392335935644940051139628_1&ad_pvid=20230131032519392335935644940051139628_1)
 
 ## **Tools**
 |Item                                       |Count  |Example|
 |:---                                       |:---:  |:---:|
 |Soldering iron 80W                         |1      |[Link](https://www.aliexpress.com/item/4000005873814.html?spm=a2g0o.productlist.0.0.3d5059f26KRLVN&algo_pvid=5b1311ed-043b-48b1-9540-15845a9cffab&algo_exp_id=5b1311ed-043b-48b1-9540-15845a9cffab-31)|
 |Tin wire 0.5 to 1mm will do                |1      |[Link](https://www.aliexpress.com/item/32946643268.html?spm=a2g0o.productlist.0.0.21334be6X9YM36&algo_pvid=50712cb8-a6be-4a82-bdfd-3deb5e2c4329&algo_exp_id=50712cb8-a6be-4a82-bdfd-3deb5e2c4329-0)|
-|Hot glue gun                               |1      |[Link](https://www.aliexpress.com/item/1005001393578323.html?spm=a2g0o.productlist.0.0.3b063cf9nndoZZ&algo_pvid=59c64fb0-2832-4323-987f-0915939b8da6&algo_exp_id=59c64fb0-2832-4323-987f-0915939b8da6-7)|
+|Hot glue gun (optional)                    |1      |[Link](https://www.aliexpress.com/item/1005001393578323.html?spm=a2g0o.productlist.0.0.3b063cf9nndoZZ&algo_pvid=59c64fb0-2832-4323-987f-0915939b8da6&algo_exp_id=59c64fb0-2832-4323-987f-0915939b8da6-7)|
+|Solder flux/paste                          |1      |[Link](https://www.aliexpress.com/item/32948598235.html?spm=a2g0o.productlist.main.5.5fc1399cRxSV86&algo_pvid=c2394116-24f7-4a01-9828-c23ef7e63e7c&algo_exp_id=c2394116-24f7-4a01-9828-c23ef7e63e7c-2&pdp_ext_f=%7B%22sku_id%22%3A%2212000024724968108%22%7D&pdp_npi=2%40dis%21SGD%215.13%214.0%21%21%21%21%21%40211bea6216751652086441714d0731%2112000024724968108%21sea&curPageLogUid=ZUlXoJqPWq7N)
+|Digital multimeter with diode test         |1      |[Link](https://www.aliexpress.com/item/1005004951791846.html?spm=a2g0o.productlist.main.15.7c866bd7cBUYed&algo_pvid=751c34a6-03de-4e0b-b461-6b0e1ab36d6d&algo_exp_id=751c34a6-03de-4e0b-b461-6b0e1ab36d6d-7&pdp_ext_f=%7B%22sku_id%22%3A%2212000031134230465%22%7D&pdp_npi=2%40dis%21SGD%215.37%214.83%21%21%21%21%21%40211bf04a16751658855944487d0764%2112000031134230465%21sea&curPageLogUid=sxHeDutjDcqK)
 
 ## **Remarks**
 *   You can buy a bundle that is soldering iron + tin wire + some other accessories that you think might come usefull. Buying a bundle with a multimeter is a good idea.
-*   Better kecaps are [MKUltra](https://mkultra.click/mbk-choc-keycaps)
-*   If possible getting switches lighter than 25g should make sense, but since I wasn't able to put my hands on any of these I can't recommend. Choc springs are almost impossible to get.
-
-## ***[Optional]* Additional items for trackball module**
-
-You will have to get all the items from the 'trackball base' plus the ones from the ball size you're planning to use. Paracord and heatshrink tube are rather optional but using it will result in better hold of the cable in trackball base. As a plus you can match the color of paracord to the TRRS cables.
-
-## **BOM - trackball base**
-|Item                                       |Count  |Example|
-|:---                                       |:---:  |:---:|
-|6 core wire                                |1m     |[Link](https://www.aliexpress.com/item/1005001886139193.html?spm=a2g0o.productlist.0.0.75cee7daBQPjdC&algo_pvid=ddc5ba45-1e3a-4247-86ff-a8b83a390748&algo_exp_id=ddc5ba45-1e3a-4247-86ff-a8b83a390748-0)|
-|Bearing steel rollers M3x8mm               |3      |[Link](https://www.aliexpress.com/item/4000176913597.html?spm=a2g0s.9042311.0.0.27424c4d8d9YIH)|
-|ADNS9800 breaktout board                   |1      |[Link](https://github.com/kbjunky/ADNS9800) or [Pre-assembled](https://www.tindie.com/products/jkicklighter/adns-9800-laser-motion-sensor/)|
-|M2x5mm flat head screw                     |2      |[Link](https://www.aliexpress.com/item/1005001763933939.html?spm=a2g0o.productlist.0.0.5069306aGAEBqO&algo_pvid=b928c17d-eb55-42dd-a5fd-f70dc61b1c6e&algo_exp_id=b928c17d-eb55-42dd-a5fd-f70dc61b1c6e-1)|
-|Paracord 4mm                               |1m     |[Link](https://www.aliexpress.com/item/4000288304576.html?spm=a2g0o.productlist.0.0.469c57b3KTd8Gz&algo_pvid=2e98efd8-3384-46e1-97e4-6de90e955e46&algo_exp_id=2e98efd8-3384-46e1-97e4-6de90e955e46-0)|
-|Heat shrink tube                           |1box   |[Link](https://www.aliexpress.com/item/32985677716.html?spm=a2g0o.productlist.0.0.5f406406FbPlSp&algo_pvid=77cd5c76-4f2a-4af4-9cd5-eb6d1cbf94fd&algo_exp_id=77cd5c76-4f2a-4af4-9cd5-eb6d1cbf94fd-0)|
-## **BOM - 34mm trackball**
-|Item                                       |Count  |Example|
-|:---                                       |:---:  |:---:|
-|SiO2 bearing 603(3x9x3mm)                  |3      |[Link](https://www.aliexpress.com/item/1005002254638667.html?spm=a2g0s.9042311.0.0.27424c4dtEdyQj)|
-|M570/Ergo 34mm ball                        |1      |[Link](https://www.aliexpress.com/item/1005003007477853.html?spm=a2g0o.productlist.0.0.5c2375b6zAYly4&algo_pvid=002d0afb-2191-423d-83ef-9072c89420e0&algo_exp_id=002d0afb-2191-423d-83ef-9072c89420e0-3)|
- 
-## **BOM - 44mm trackball**
-|Item                                       |Count  |Example|
-|:---                                       |:---:  |:---:|
-|SiO2 bearing 603(3x9x3mm)                  |3      |[Link](https://www.aliexpress.com/item/1005002254638667.html?spm=a2g0s.9042311.0.0.27424c4dtEdyQj)|
-|44mm Trackman ball                         |1      |[Link](https://www.aliexpress.com/item/4001206864887.html?spm=a2g0o.productlist.0.0.5c2375b6zAYly4&algo_pvid=002d0afb-2191-423d-83ef-9072c89420e0&algo_exp_id=002d0afb-2191-423d-83ef-9072c89420e0-0)|
-
-## **BOM - 52mm trackball**
-|Item                                       |Count  |Example|
-|:---                                       |:---:  |:---:|
-|52mm snooker ball                          |1      |[Link](https://www.aliexpress.com/item/4001039556813.html?spm=a2g0s.9042311.0.0.68774c4dwpTP9T)|
-|MR63ZZ bearings  3x6x2.5mm                 |3      |[Link](https://www.aliexpress.com/item/32833964689.html?spm=a2g0s.9042311.0.0.27424c4d8qSE8j)|
-
-
-## **Remarks**
-*   Two types of rotary encoders are supported, vertical and horizontal. In my build I went with horizontal on the right side and vertical on the left, and I would recommend this setup as the right one is meant to act as a mouse roller/scroll. But it's up to you which one you choose. Especially if you're not planning to use the trackball functionality. Pick two as the sockets doesn't support switches there. But encoders are interchangeable. 
-*   Use recommended type of bearing for particular ball. This ensures smooth operation of the ball. Different bearing than specified won't support ball of other size at the correct height from the sensor.
-
+*   Better kecaps are [MKUltra](https://mkultra.click/mbk-choc-keycaps).
+*   For MX switches any linear switch can be swapped with 20g spring.
+*   TRRS cable can be L shaped only on the left side due to the trackball blocking the way on the right side.
+*   Solder flux helps with melting isolation on the enameled wire. Just put some where you need to melt the isolation and it should melt quickier.
+*   Multimeter (continuity tester) is a must and comes handy when testing if every wire is connected properly.
+*   Using heat inserts is recommended.
 
 # **Build guide**
+
+## **Chordie OpenSCAD generator**
+Chordie comes with OpenSCAD generator that allows for easy cutomization of:
+*   Height of switch/encoder columns.
+*   Use of heat inserts or just screws.
+*   I2C expander mounting hole dimensions as well as having expander exposed/covered.
+*   Choc/MX type sockets.
+*   IR sensor.
+*   Custom tolerance of switch/encoder sockets.
+
+How to customize your Chordie:
+*   Download and install [OpenSCAD](https://openscad.org/).
+*   Open ***config.scad*** from generator folder of this repository with OpenSCAD.
+*   Adjust settings following tips from the config file.
+*   When ready to print hit 'Render' (F6) and then ***File->Export to STL***.
+*   Tip: Encoder (ENC) column should be a bit higher than (FF) column. Also thumb keys should be a bit higher than the rest. But this is mostly my preference. 
+*   Tip: When measuring I2C expander boards provide exact value into the config file. Proper margin will be added by default.
+
+![](/img/i2cdim.png)
+
 ## **3D printing**
-Recommended settings for top part (holding switches etc), bottom not angled and encoder cap:
+Recommended settings:
+*   Material: any, preferably PLA/PETG
 *   Layer height 0.2mm
-*   Infill 30%
-*   Use mirroring feature of your slicer to print left half
-*   Supports not needed
-
-Recommended settings for other parts:
-*   Layer height 0.3mm (but if you have time 0.2mm will work just fine too)
-*   Infill 15%
-*   Use mirroring feature of your slicer to print left half
-*   Supports not needed
-*   Print desired trackball module matching your ball size. Bottom part is common for all sizes.
-
-### **I would suggest printing top with the raised thumb and for the bottom part left side: angled 10 deg, and for the right side: flat with/o tracbkall**
-
-
+*   Infill >=15%
+*   Supports are needed under audio jack holes and on the trackball where MCU USB socket is placed.
 
 ## **Wiring**
-Start with attaching kepton tape to the bottom side of ProMicro and top side of I2C expanders(cover the pads). This way you will avoid tin blobs (I didn't do it for I2C expanders and it was a mistake).
-![](/img/kepton1.jpg)
+Before you start make sure your Chordie suits your hands well. Play with it for a while with just switches placed into the sockets. Wiring takes some time and last thing you want to do is to start over because some part isn't properly setup. For example you might find out that encoder is too low etc. Check if canals for the wires aren't filled with plastic. Check if all parts (switches/audio jacks/encoder/I2C exapanders etc.) fit into their sockets.
 
-Setup the pins on I2C expanders following the diagram.
+**While routing check every connection with continuity meter!**
 
-![](/img/i2c1.png)
+**If you're using heat inserts start with them. Once done try if the bottom plate fits etc.**
+![](/img/heatinsertsfit.jpg)
+
+Attach kepton tape to the bottom side of ProMicro and top side of I2C expanders(cover the pads). This way you will avoid tin blobs.
+![](/img/kapton.png)
+
+Setup the address pins on I2C expanders following the diagram.
+
+![](/img/address.png)
 
 It should look something like this.
 
 ![](/img/i2c2.png)
 
-Next you will have to prepare the switches. Put some tin on every switch pin. Then for the pinky you will have to attach 2 long pieces of enameled wire. It's easier this way since pinky is the tallest and it's a bit difficult to solder once it's socketed in place.
+Next you will have to prepare the switches. Put some tin on every switch pin then place the switches into the sockets. Make sure pins are facing the same way as on the photo/diagram. At this point you can also attach the I2C expander. Use small amount of hot glue to lock it in place. Be sure not to cover any of the pads.
 
-![](/img/pinky1.jpg)
+![](/img/tinswitch.jpg)
 
-Then insert switches. Make sure pins are facing the same way as on the photo/diagram. At this point you can also attach the I2C expander. Use small amount of hot glue to lock it in place. Be sure not to cover any of the pads.
 
-![](/img/pins1.jpg)
+Once this is done follow the below diagram and connect all the GND pins for the switches. For now skip the rotary encoder/audio jack part. These will be done later. Route the enameled wire through the canals. For this part use one wire that will connect every switch GND pin and then connect to the nearest GND on the I2C Expander.
 
-Once this is done follow the below diagram and connect all the GND pins for the switches. For now skip the rotary encoder/audio jack part. These will be done later. Route the enameled wire through the canals. Otherwise it might get clipped when the bottom part is attached. 
+![](/img/gndswitch.png)
 
-![](/img/pins2.png)
+It should look more or less like this (don't mind the encoder and audio jack, it's not important at this stage).
 
-Wiring should look like this.aa
+![](/img/onewire.jpg)
+
+Now you can move to connecting switches to the I2C Expander. Refer to the diagram. **Avoid routing over 'B' pads on I2C Expander. Check the photo below on how to properly route the wires.** 
+
+![](/img/switch2i2c.png)
+
+Wiring should look like this. Note how wires mostly go up, it's OK even if it means goind around.
 
 ![](/img/wiring1.jpg)
 
-Now it's time to connect every switch to the respective pin on the I2C expander. Follow the diagram below for proper wiring.
+Now it's time to connect the encoder. Attach long pieces of wire to it's pins. There are 2 pins that are GND (refer to the diagram). Connect them with one long wire. When routing, those GND pins can be connected to any nearest GND either to a switch or just directly to the wire.
 
-![](/img/pins3.png)
+![](/img/encsetup.jpg)
 
-Prepare encoders. From the 12mm vertical one clip mounting legs (thick ones on the sides) and solder some wire to each leg. It will make wiring easier later on. Attach the 3D printed cap which later on should clip into the encoder socket (it fits only one way so try first). Use the screw and a washer that came with the encoder (as per the image). For the horizontal one just solder some wire except for the first pin which is unused.
+Refer to the diagram when connecting encoder to the I2C Exapnder.
+![](/img/encoder.png)
 
-![](/img/enc1.png)
+Now it's time for audio jacks. They should fit quite tight. Use some tool to push them inside. Use the 3D printed spacers to prevent sockets from sliding out when connecting the TRRS cable.
 
-Push the encoders into the slots and follow below diagram for wiring. Be sure to keep the same pin orientation. Also you might want to use hot glue to hold them in place. **Remember to connect GND pins (look at the switch GND diagram)!**
+![](/img/ajspacers.png)
 
-![](/img/enc2.png)
+Now follow the diagram and connect all pins accordingly. Routing start from I2C Expander towards the audio socket and then leave some wire that will later on be connected to Pro Micro. It's easier this way compared to later on trying to solder additional wire to the audio socket pin.
 
-Before moving on to assembling audio jacks I would recommend using some hot glue on the switches that are above the audio jack. Otherwise later on it will be impossible to reach the bottom of the switch.
-First you will have to bend the pins on the audio jack socket and cut the plastic pieces marked in red. There's a special pocket inside the wall for the socket to fit in. Try pushing it so it's at the same level as the bottom of the keyboard. 
+![](/img/audioi2c.png)
+![](/img/extwire.jpg)
 
-![](/img/audio1.png)
+If you've decided on using IrDA here's how it should be wired.
 
-Follow the diagram below for proper wiring(I have only named proper pins). You can wire GND to the nearest GND, for example to the encoder GND or the one on the nearest switch or even wire.
+![](/img/irda.png)
 
-![](/img/audio2.png)
+At this point you should have a working mouse sensor and be able to connect it to the ProMicro as well as connecting SDA (ProMicro pin 2)/SCL (ProMicro pin 3)/VCC/GND lines from the keyboard to the ProMicro. For connecting sensor to the ProMicro you can use the same enameled wire. Sandwich it with the ProMicro. There's a dedicated space for ProMicro on the bottom plate to hold it in place, in between the studs that hold mouse sensor. 
 
-And final product should look like this (pay attention to the audio socket position and don't mind that I'm lacking the GND connection).
+## **Mouse sensor wiring**
+|ProMicro Pin|Sensor pin|
+|:---        |:---:|
+|A0          |NCS  |
+|15          |SCLK |
+|14          |MISO |
+|16          |MOSI |     
 
-![](/img/audio3.jpg)
+![](/img/sandwich.jpg)
+![](/img/assembled.png)
 
-That should be it for assembling keyboard halves. Secure everything with hot glue. Should look more or less like this. Be sure no wire is sticking out, place everything inside the canals and secure with hot glue.
+Congratulations!
 
-![](/img/done1.jpg)
 
-Now it's time for the MCU part. First take a look at assembled part. This will give you a general understanding how it should look like. There are 2 pull up resistors wired from RAW pin to pin 2 (SDA) and pin 3 (SCL). Audio jacks sockets should clip in place. Notice that audio jack pins are bent in the opposite direction (inwards) compared to the keyboard halves. If you're planning to use the trackball I would suggest wiring connecting cable first then wiring audio jack sockets. Refer to the wiring diagram for all of the parts. Reset switch is not necessary. I've only used one because I knew I will be programming it multiple times and shorting pins in a long run is not the best way to enter flashing mode. Besides pressing ASETNIOP keys will enter DFU mode so you can totally skip the reset switch. Also it's a real pain to solder :D
-
-![](/img/mcu1.jpg)
-
-First are the pull up resistors.
-
-![](/img/mcu2.png)
-
-Then the trackball if you're using one(you can choose any GND pin).
-
-![](/img/mcu3.png)
-
-And audio sockets come last (You can use VCC pin instead of RAW).
-
-![](/img/mcu4.png)
-
-For the trackball assembly one picture is worth a thousand words. All pins are described so it's just a matter of soldering.
-
-![](/img/tb1.png)
-
-Check **src** folder for flashing/layout information.
+Now it's flashing time, check **src** folder for flashing/layout information.
 
 **And that's it. Congratulations!**
 
