@@ -164,7 +164,7 @@ module baseplate_extrude() {
 
 module proximity_sensor_extrude() {
     translate(position_of(PROXIMITY_SENSOR)+[0,0,-0.01])            
-    linear_extrude(height_of(SOCKET)+position_of(switch_placement[5]).z+0.02+lor(type_of(SOCKET)=="mx",6,1.2))
+    linear_extrude(height_of(BASEPLATE)+height_of(SOCKET)+lor(type_of(SOCKET)=="mx",6, 1.2)+EI_Z*height_of(SOCKET))
         polygon(proximity_sensor_polygon);   
 }
 
@@ -185,11 +185,10 @@ module audio_socket_base_extrude() {
 
 module ProximitySensorSocket() {
     let(
-        wall_thickness = 1.2,
-        middle_finger_socket_index = 5
+        wall_thickness = 1.2
     ) {
         translate(position_of(PROXIMITY_SENSOR))
-        linear_extrude(height_of(SOCKET) + position_of(switch_placement[middle_finger_socket_index]).z+lor(type_of(SOCKET)=="mx",6,1.2))
+        linear_extrude(height_of(BASEPLATE)+height_of(SOCKET)+EI_Z*height_of(SOCKET))
             offset(delta=wall_thickness)
                 polygon(proximity_sensor_polygon);
     }
