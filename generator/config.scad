@@ -19,15 +19,15 @@ TB2_Z = 0.75;
 TB1_Z = 0.75;
 FF_Z = 0.375;
 TN_Z = 0.5;
-EI_Z = 0.125;
+EI_Z = 0.25;
 SO_Z = 0.125;
-AP_Z = 0.125;
+AP_Z = 0.25;
 ENC_Z = 0.625;
 
 /* 
     If true will generate right side with trackball etc. otherwise left side with encoder
 */
-RIGHT_SIDE = true; 
+RIGHT_SIDE = false; 
 
 /*
     Type of socket to generate. "choc" for Choc or "mx" for MX compatible socket

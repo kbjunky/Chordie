@@ -252,88 +252,77 @@ module SocketEncoder(position, rotation) {
 
 module MakeWireCanals() {
 let(
-        steps = 24,
-        diameter = 1,
-        spacing = 2.4,
-        z_offset = 1.2, 
+        height = 1.2,
+        z_offset = 1.2,
+        width = 2.8, 
         pos = [
             [
-                ["position", [60, 2.4*GRID_SIZE, z_offset]],
-                ["rotation", [90,0,90]],
-                ["height", 65]
+                ["position", [0.5*GRID_SIZE, 0*GRID_SIZE, z_offset]],
+                ["rotation", [0,0,0]],
+                ["height", 10]
             ],
             [
-                ["position", [lor(!RIGHT_SIDE,75,85), 1.39*GRID_SIZE, z_offset]],
-                ["rotation", [90,0,90]],
-                ["height", lor(!RIGHT_SIDE,70, 60)]
+                ["position", [1.5*GRID_SIZE, 0.25*GRID_SIZE, z_offset]],
+                ["rotation", [0,0,0]],
+                ["height", 10]
             ],
             [
-                ["position", [lor(!RIGHT_SIDE,80,85), 0.95*GRID_SIZE, z_offset]],
-                ["rotation", [90,0,90]],
-                ["height", 55]
+                ["position", [3*GRID_SIZE, 0.65*GRID_SIZE, z_offset]],
+                ["rotation", [0,0,0]],
+                ["height", 35]
+            ],            
+            [
+                ["position", [4.3*GRID_SIZE, 1.4*GRID_SIZE, z_offset]],
+                ["rotation", [0,0,0]],
+                ["height", 50]
             ],
             [
-                ["position", [57, 0.65*GRID_SIZE, z_offset]],
-                ["rotation", [90,0,90]],
-                ["height", 30]
+                ["position", [3*GRID_SIZE, 2.4*GRID_SIZE, z_offset]],
+                ["rotation", [0,0,0]],
+                ["height", lor(RIGHT_SIDE, 70, 60)]
             ],
             [
-                ["position", [27, 0.4*GRID_SIZE, z_offset]],
-                ["rotation", [90,0,90]],
+                ["position", [2.5*GRID_SIZE, 0.8*GRID_SIZE, z_offset]],
+                ["rotation", [0,0,35]],
                 ["height", 15]
             ],
             [
-                ["position", [10, 0.15*GRID_SIZE, z_offset]],
-                ["rotation", [90,0,90]],
-                ["height", 15]
+                ["position", [0.75*GRID_SIZE, 0.8*GRID_SIZE, z_offset]],
+                ["rotation", [0,0,90]],
+                ["height", lor(RIGHT_SIDE, 25, 0)]
             ],
             [
-                ["position", [70, 2.8*GRID_SIZE, z_offset]],
-                ["rotation", [90,0,0]],
-                ["height", 15]
+                ["position", [3.75*GRID_SIZE, 2.2*GRID_SIZE, z_offset]],
+                ["rotation", [0,0,90]],
+                ["height", 35]
             ],
             [
-                ["position", [75, 1.75*GRID_SIZE, z_offset]],
-                ["rotation", [90,0,0]],
-                ["height", 8]
+                ["position", [3*GRID_SIZE, 1.7*GRID_SIZE, z_offset]],
+                ["rotation", [0,0,90]],
+                ["height", 10]
             ],
             [
-                ["position", [85, 1.75*GRID_SIZE, z_offset]],
-                ["rotation", [90,0,0]],
-                ["height", 8]
+                ["position", [4.75*GRID_SIZE, 1.7*GRID_SIZE, z_offset]],
+                ["rotation", [0,0,90]],
+                ["height", 10]
             ],
             [
-                ["position", [56, 1.75*GRID_SIZE, z_offset]],
-                ["rotation", [90,0,0]],
-                ["height", 8]
+                ["position", [2*GRID_SIZE, 1.3*GRID_SIZE, z_offset]],
+                ["rotation", [0,0,90]],
+                ["height", lor(RIGHT_SIDE, 0, 25)]
             ],
-            [
-                ["position", [38, 1.25*GRID_SIZE, z_offset]],
-                ["rotation", [90,0,0]],
-                ["height", lor(!RIGHT_SIDE,35,0)]
-            ],
-            [
-                ["position", [101, 1.75*GRID_SIZE, z_offset]],
-                ["rotation", [90,0,45]],
-                ["height", 25]
-            ],
-            [
-                ["position", [13, 1*GRID_SIZE, z_offset]],
-                ["rotation", [90,0,15]],
-                ["height", lor(!RIGHT_SIDE,0,25)]
+             [
+                ["position", [2.5*GRID_SIZE, 1.5*GRID_SIZE, z_offset]],
+                ["rotation", [0,0,0]],
+                ["height", lor(RIGHT_SIDE, 0, 15)]
             ]
         ]
     ){
         for(canal = pos) {
             translate(position_of(canal)) {
                 rotate(rotation_of(canal))
-                    cylinder(height_of(canal), d = diameter, $fn = steps, center = true);
-            }
-
-            translate(position_of(canal) + (rotation_of(canal)==[90,0,90] ? [0,spacing,0] : [spacing,0,0]))  {
-                rotate(rotation_of(canal))
-                    cylinder(height_of(canal), d = diameter, $fn = steps, center = true);
-            }
+                    #cube([height_of(canal), width, height], center = true);
+            } 
                         
         }
     }
@@ -587,19 +576,16 @@ module MakeTrackballMount() {
                     
                 translate([23.83,-7,height_of(BASEPLATE)/2])
                         cube([10,19.05,height_of(BASEPLATE)], center=true);
-
-                //*translate([0,-26.61,height_of(BASEPLATE)/2])
-                        //cube([14.29,11,height_of(BASEPLATE)], center=true);
-                    
-            
-                difference() {
-                    translate([-11.67,-20.95,height/2])
-                        cube([12.11,7.16,height], center=true);
                 
-                }
+                translate([-8.06,-21.66,height/2])
+                    cube([15.18,7.16,height], center=true);
+                
             }
+             translate([-1.2, -18.74, cavity_height/2])
+                cube([7.52, 10.58, cavity_height+0.05], center = true);
+
             translate([0,0,height/2])   
-            cylinder(h=height+0.05, d=inner_wall_dia, $fn=steps, center=true); 
+                cylinder(h=height+0.05, d=inner_wall_dia, $fn=steps, center=true); 
             //inner cut for MCU
             translate([0,18.7,0])
                 cube([19,7.52, height+0.05], center=true);          
@@ -607,10 +593,10 @@ module MakeTrackballMount() {
             translate([0,23.6,0])
                 cube([10,5,height+0.05], center=true);
 
-             translate([-8.15,-20.17,cavity_height/2])
+             translate([-6.07,-20.88,cavity_height/2])
                     cube([16.75, 6.3, cavity_height+0.05], center=true);
 
-            translate([-18.52,-20.15,4.43])
+            translate([-17,-20.86,4.43])
             rotate([0,90,0])
                 cylinder(h=6, d=5.15, $fn=32, center=true);
         }
