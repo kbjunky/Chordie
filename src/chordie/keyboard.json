@@ -1,0 +1,67 @@
+{
+  "manufacturer": "KBJ",
+  "keyboard_name": "KBJ Chordie",
+  "maintainer": "kbjunky",
+  "author": "KBJ",
+  "documentation": "https://github.com/kbjunky/Chordie",
+  "notes": "Come in Chordie they all chord in here",
+  "url": "https://github.com/kbjunky/Chordie",
+  "bootloader": "caterina",
+  "debounce": 5,
+  "diode_direction": "COL2ROW",
+  "features": {
+    "extrakey": true,
+    "mousekey": true,
+    "pointing_device": true
+  },
+  "matrix_size": {
+    "cols": 21,
+    "rows": 1
+  },
+  "mouse_key": {
+    "enabled": true
+  },
+  "processor": "atmega32u4",
+  "qmk": {
+    "locking": {
+      "enabled": true,
+      "resync": true
+    }
+  },
+  "usb": {
+    "device_version": "1.0.0",
+    "pid": "0x6511",
+    "vid": "0xBEEF"
+  },
+  "version": 1,
+  "layout_aliases": {
+    "LAYOUT_Chordie": "LAYOUT"
+  },
+  "layouts": {
+    "LAYOUT": {
+      "layout": [
+        {"label": "LIR", "matrix": [0, 11], "x": 0, "y": 0},
+        {"label": "RIR", "matrix": [0, 2], "x": 1, "y": 0},
+        {"label": "LEU", "matrix": [0, 1], "x": 2, "y": 0},
+        {"label": "LES", "matrix": [0, 12], "x": 3, "y": 0},
+        {"label": "LED", "matrix": [0, 0], "x": 4, "y": 0},
+        {"label": "L1", "matrix": [0, 20], "x": 5, "y": 0},
+        {"label": "L2", "matrix": [0, 19], "x": 6, "y": 0},
+        {"label": "L3", "matrix": [0, 18], "x": 7, "y": 0},
+        {"label": "L4", "matrix": [0, 17], "x": 8, "y": 0},
+        {"label": "R1", "matrix": [0, 6], "x": 9, "y": 0},
+        {"label": "R2", "matrix": [0, 5], "x": 10, "y": 0},
+        {"label": "R3", "matrix": [0, 4], "x": 11, "y": 0},
+        {"label": "R4", "matrix": [0, 3], "x": 12, "y": 0},
+        {"label": "L5", "matrix": [0, 16], "x": 13, "y": 0},
+        {"label": "R5", "matrix": [0, 7], "x": 14, "y": 0},
+        {"label": "L6", "matrix": [0, 15], "x": 15, "y": 0},
+        {"label": "R6", "matrix": [0, 8], "x": 16, "y": 0},
+        {"label": "L7", "matrix": [0, 14], "x": 17, "y": 0},
+        {"label": "R7", "matrix": [0, 9], "x": 18, "y": 0},
+        {"label": "L8", "matrix": [0, 13], "x": 19, "y": 0},
+        {"label": "R8", "matrix": [0, 10], "x": 20, "y": 0}
+      ]
+    }
+  }
+}
