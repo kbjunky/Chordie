@@ -7,6 +7,9 @@
 
 ![](/img/mxchocchordie.png)
 
+## **This project is deprecated, check back soon for an updated version of Chordie** ##
+
+
 ### Chordie is a chording keyboard heavily inspired by [gBoards' Ginny keyboard](https://www.gboards.ca/product/ginni) running on awesome chording engine by [DennyTom](https://github.com/DennyTom/qmk_firmware/tree/feature/buttery_engine_v2/users/dennytom/chording_engine). It supports all 104 keys found on normal keyboards and much more in large part thanks to [ASETNIOP](http://asetniop.com/) layout. For a complete experience it's also equipped with trackball. Except for the mouse sensor module whole assembly can be handwired in about 6 hours.
 
 ## **BOM**
@@ -22,13 +25,13 @@
 |Kailh Choc V1 25g or 20g MX switch         |16     |[Link](https://www.aliexpress.com/item/4000907409650.html?spm=a2g0o.store_pc_groupList.8148356.11.606939a66Tvk6L)|
 |Choc/MX keycaps 1u                         |10     |[Link](https://www.aliexpress.com/item/32979973961.html?spm=a2g0o.store_pc_groupList.8148356.21.1b9d36a4Coe1f0)|
 |Choc/MX keycaps 1.5u                       |6      |[Link](https://www.aliexpress.com/item/4000135705283.html?spm=a2g0o.store_pc_groupList.8148356.31.5b1136a4d8gvZK)|
-|8mmx1mm antislip pads                      |14     |[Link](https://www.aliexpress.com/item/32767105328.html?spm=a2g0o.order_list.order_list_main.5.4f631802SBcIju)|
-|ZrO2 bearing ball                          |3      |[Link](https://www.aliexpress.com/item/4000140957504.html?spm=a2g0o.order_list.order_list_main.66.21ef18020rLkLI)|
+|8mm x 1mm antislip pads                      |14     |[Link](https://www.aliexpress.com/item/32767105328.html?spm=a2g0o.order_list.order_list_main.5.4f631802SBcIju)|
+|ZrO2 bearing ball                          |3      |[Link](https://www.aliexpress.com/item/4000829132124.html?spm=a2g0o.order_list.order_list_main.24.649218029s2nlG)|
 |M570/Ergo 34mm trackball ball              |1      |[Link](https://www.aliexpress.com/item/1005003007477853.html?spm=a2g0o.productlist.0.0.5c2375b6zAYly4&algo_pvid=002d0afb-2191-423d-83ef-9072c89420e0&algo_exp_id=002d0afb-2191-423d-83ef-9072c89420e0-3)|
 |M2x3mm heat insert (optional)              |15     |[Link](https://www.aliexpress.com/item/33021847966.html?spm=a2g0o.order_detail.order_detail_item.9.62d2f19cZBgXLP)
 |M2x15mm screw (trackball)                  |3      |[Link](https://www.aliexpress.com/item/32973784147.html?spm=a2g0o.order_detail.order_detail_item.3.28ecf19cnWSpWO)
 |M2x4mm screw                               |12     |[Link](https://www.aliexpress.com/item/32973784147.html?spm=a2g0o.order_detail.order_detail_item.3.28ecf19cnWSpWO)
-|PMW3360 sensor module                      |1      |[Link](https://github.com/kbjunky/PMW3360)
+|PMW3360 sensor module                      |1      |[Link](https://github.com/kbjunky/PMW3360) \| [Link](https://www.aliexpress.com/item/1005007729769668.html?spm=a2g0o.order_list.order_list_main.55.649218029s2nlG)
 
 ## **IrDA** ***(optional)***
 |Item                                       |Count  |Example|
