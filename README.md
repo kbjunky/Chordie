@@ -1,3 +1,4 @@
+# **This project is deprecated, check back soon for an updated version of Chordie** #
 # **Chordie**
 ## **A chording keyboard you shouldn't be scared of**
 
@@ -7,7 +8,7 @@
 
 ![](/img/mxchocchordie.png)
 
-## **This project is deprecated, check back soon for an updated version of Chordie** ##
+
 
 
 ### Chordie is a chording keyboard heavily inspired by [gBoards' Ginny keyboard](https://www.gboards.ca/product/ginni) running on awesome chording engine by [DennyTom](https://github.com/DennyTom/qmk_firmware/tree/feature/buttery_engine_v2/users/dennytom/chording_engine). It supports all 104 keys found on normal keyboards and much more in large part thanks to [ASETNIOP](http://asetniop.com/) layout. For a complete experience it's also equipped with trackball. Except for the mouse sensor module whole assembly can be handwired in about 6 hours.
