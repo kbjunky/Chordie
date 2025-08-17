@@ -16,11 +16,11 @@ BOOTLOADER = caterina
 #   comment out to disable the options.
 #
 #BOOTMAGIC_ENABLE = yes	# Virtual DIP switch configuration(+1000)
-MOUSEKEY_ENABLE = yes	# Mouse keys(+4700)
-EXTRAKEY_ENABLE = yes	# Audio control and System control(+450)
+#MOUSEKEY_ENABLE = yes	# Mouse keys(+4700) # Moved to keyboard.json
+#EXTRAKEY_ENABLE = yes	# Audio control and System control(+450) # Moved to keyboard.json
 #CONSOLE_ENABLE = yes	# Console for debug(+400)
 CUSTOM_MATRIX = yes    # Remote matrix from the wireless bridge
-POINTING_DEVICE_ENABLE = yes
+#POINTING_DEVICE_ENABLE = yes # Moved to keyboard.json
 POINTING_DEVICE_DRIVER = pmw3360
 
 SRC += matrix.c 
